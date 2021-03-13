@@ -1,0 +1,17 @@
+<IRIS Version="1" Message="ModelRequest" MessageTypeId="10" MessageID="300802">
+	<Date_and_time_transmission>0123456789</Date_and_time_transmission>
+    <Amount_transaction>000875000000</Amount_transaction>
+    <Primary_account_number>2334737608358771</Primary_account_number>
+    <File_update_code>A</File_update_code>
+    <Service_indicator>0RETAIL</Service_indicator>
+    <Card_acceptor_identification_code>000000000001001</Card_acceptor_identification_code>
+    <Merchant_Type>6011</Merchant_Type>
+    <Payee>ATMATMATMATMATMATMATMATMA</Payee>
+    <Card_acceptor_name>JAKARTAJAKARTAJAKARTAJAKARTAJAKARTAJAKAR</Card_acceptor_name>
+    <Currency_code_settlement>IDN</Currency_code_settlement>
+    <Security_related_control_information>0095310511183706</Security_related_control_information>
+    <Card_acceptor_terminal_identification>00A11234</Card_acceptor_terminal_identification>
+    <Message_security_code>0FB8</Message_security_code>
+    <Retrieval_reference_number>0000000DC01e</Retrieval_reference_number>
+    <Function_code>010</Function_code>
+</IRIS>
