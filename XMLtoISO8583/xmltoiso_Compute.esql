@@ -1,0 +1,135 @@
+
+
+CREATE COMPUTE MODULE xmltoiso_Compute
+
+    CREATE FUNCTION Main() RETURNS BOOLEAN
+    BEGIN
+        SET OutputRoot.Properties = InputRoot.Properties;
+        SET OutputRoot.Properties.MessageType = '{}:ISO8583_1987_Unpacked';
+        CREATE LASTCHILD OF OutputRoot DOMAIN('DFDL');
+        DECLARE InRef REFERENCE TO InputRoot;
+        CALL RemoveUnrequiredXMLAttributes(InRef);
+        SET OutputRoot.DFDL = InRef.XMLNSC;
+        CREATE NEXTSIBLING OF OutputRoot.DFDL.ISO8583_1987_Unpacked.MTI_MessageOrigin NAME 'PrimaryBitmap';
+        DECLARE DFDLPointer REFERENCE TO OutputRoot.DFDL.ISO8583_1987_Unpacked.PrimaryBitmap;
+
+        CALL PopulatePrimaryBitmap(DFDLPointer);
+
+        DECLARE SecondaryBitmap BOOLEAN FALSE;
+        IF CAST(SUBSTRING(FIELDNAME(OutputRoot.DFDL.ISO8583_1987_Unpacked.*[<]) AFTER '_') AS INT) > 64 THEN
+            SET SecondaryBitmap = TRUE;
+        END IF;
+
+        IF SecondaryBitmap THEN
+            -- This means a SecondaryBitmap will be required
+            CREATE NEXTSIBLING OF OutputRoot.DFDL.ISO8583_1987_Unpacked.PrimaryBitmap NAME 'SecondaryBitmap';            
+            MOVE DFDLPointer TO OutputRoot.DFDL.ISO8583_1987_Unpacked.SecondaryBitmap;
+            CALL PopulateSecondaryBitmap(DFDLPointer);
+
+            -- SecondaryBitmap is present, so set logical Bit001
+            SET OutputRoot.DFDL.ISO8583_1987_Unpacked.PrimaryBitmap.Bits001to004 = '8';
+        ELSE
+            MOVE DFDLPointer TO OutputRoot.DFDL.ISO8583_1987_Unpacked.PrimaryBitmap;
+            -- SecondaryBitmap is not present. Logical Bit001 will already be initialised to 0.
+        END IF;
+
+        -- Having created the Bitmap structures with all bits set to 0, now set the Bit values ...
+        CALL UpdateBitmapsBasedOnAvailableFields(DFDLPointer);
+
+        RETURN TRUE;
+    END;
+
+    CREATE PROCEDURE GenerateThreeDigitIndex(IN IndexInt INTEGER, OUT IndexChar CHAR)
+    BEGIN
+        SET IndexChar =
+        CASE
+            WHEN IndexInt < 10 THEN ('00' || CAST(IndexInt AS CHAR))
+            WHEN IndexInt < 100 THEN ('0' || CAST(IndexInt AS CHAR))
+            ELSE CAST(IndexInt AS CHAR)
+        END;
+    END;
+
+    CREATE PROCEDURE RemoveUnrequiredXMLAttributes(INOUT InRef REFERENCE)
+    BEGIN
+        SET InRef.XMLNSC.*:XmlDeclaration = NULL;
+        DECLARE NumberRootAttributes INTEGER CARDINALITY(InRef.XMLNSC.ISO8583_1987_Unpacked.(XMLNSC.Attribute)*[]);
+        DECLARE I1 INTEGER 1;
+        WHILE I1 <= NumberRootAttributes DO
+            SET InRef.XMLNSC.ISO8583_1987_Unpacked.(XMLNSC.Attribute)*[1] = NULL;
+            SET I1 = I1 + 1;
+        END WHILE;
+    END;
+
+    CREATE PROCEDURE PopulatePrimaryBitmap(INOUT DFDLPointer REFERENCE)
+    BEGIN
+        DECLARE I2 INTEGER 1;
+        DECLARE IndexChar1 CHAR;
+        DECLARE IndexChar2 CHAR;
+        -- Create unpacked PrimaryBitmap structure, with all bits set to 0
+        WHILE I2 < 65 DO
+            CALL GenerateThreeDigitIndex(I2,IndexChar1);
+            CALL GenerateThreeDigitIndex(I2+3,IndexChar2);
+            CREATE LASTCHILD OF DFDLPointer NAME ('Bits' || IndexChar1 || 'to' || IndexChar2) VALUE '0';
+            SET I2 = I2 + 4;
+        END WHILE;
+    END;
+
+    CREATE PROCEDURE PopulateSecondaryBitmap(INOUT DFDLPointer REFERENCE)
+    BEGIN
+        DECLARE J INTEGER 65;
+        DECLARE IndexChar1 CHAR;
+        DECLARE IndexChar2 CHAR;
+        WHILE J < 129 DO
+            -- Create unpacked SecondaryBitmap structure, with all bits set to 0
+            CALL GenerateThreeDigitIndex(J,IndexChar1);
+            CALL GenerateThreeDigitIndex(J+3,IndexChar2);
+            CREATE LASTCHILD OF DFDLPointer NAME ('Bits' || IndexChar1 || 'to' || IndexChar2) VALUE '0';
+            SET J = J + 4;
+        END WHILE;
+    END;
+
+    CREATE PROCEDURE UpdateBitmapsBasedOnAvailableFields(INOUT DFDLPointer REFERENCE)
+    BEGIN
+        -- Loop over the data fields which are present to update the Bitmaps ...
+        DECLARE BitName CHAR;
+        DECLARE BitMapName CHAR 'PrimaryBitmap';
+        DECLARE CurrentFieldName CHAR;
+        DECLARE CurrentFieldNumber INT;
+        DECLARE CurrentFieldBase INT;
+        DECLARE IndexChar1 CHAR;
+        DECLARE IndexChar2 CHAR;
+        DECLARE Value INT;
+        DECLARE CharValue CHAR;
+        
+        MOVE DFDLPointer NEXTSIBLING;
+        WHILE LASTMOVE(DFDLPointer) DO
+            -- Get field name (eg PrimaryAccountNumber_002)
+            SET CurrentFieldName = FIELDNAME(DFDLPointer);
+            -- Get the numeric part (eg 002)
+            SET CurrentFieldNumber = CAST(SUBSTRING(CurrentFieldName AFTER '_') AS INT);
+            -- Work out which BitsXXXtoYYY field contains the bit for the field
+            -- (eg the bit for _002 is in Bits001to004)
+            SET CurrentFieldBase = FLOOR((CurrentFieldNumber - 1) / 4) * 4 + 1;
+            -- Calculate the value to represent the bit as set - 8, 4, 2 or 1
+            -- (eg, _002 is 2nd bit in Bits001to004 so has value 4)
+            SET Value = CAST(POWER(2, 3 - MOD(CurrentFieldNumber - 1, 4)) AS INT);
+            -- Compute the correct BitsXXXtoYYY name
+            CALL GenerateThreeDigitIndex(CurrentFieldBase, IndexChar1);
+            CALL GenerateThreeDigitIndex(CurrentFieldBase + 3, IndexChar2);
+            SET BitName = 'Bits' || IndexChar1 || 'to' || IndexChar2;
+            IF CurrentFieldNumber > 64 THEN
+                SET BitMapName = 'SecondaryBitmap';
+            END IF;
+            -- Add the bit value to the existing value
+            SET CharValue = OutputRoot.DFDL.ISO8583_1987_Unpacked.{BitMapName}.{BitName};
+            SET CharValue = '000000000000000' || CharValue; -- Make 16 long for CAST to INT
+            SET Value = CAST(CAST(CharValue AS BLOB) AS INT) + Value;
+            SET CharValue = CAST(CAST(Value AS BLOB) AS CHAR);
+            SET CharValue = UPPER(SUBSTRING(CharValue FROM 18 FOR 1)); -- Extract n from X'000000000000000n'
+            SET OutputRoot.DFDL.ISO8583_1987_Unpacked.{BitMapName}.{BitName} = CharValue;
+
+            MOVE DFDLPointer NEXTSIBLING;
+        END WHILE;        
+    END;
+
+END MODULE;

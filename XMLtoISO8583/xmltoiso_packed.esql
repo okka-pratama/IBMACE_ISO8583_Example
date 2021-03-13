@@ -1,0 +1,103 @@
+CREATE COMPUTE MODULE xmltoiso_packed
+
+   CREATE FUNCTION Main() RETURNS BOOLEAN
+   BEGIN
+      SET OutputRoot.Properties = InputRoot.Properties;
+      SET OutputRoot.Properties.MessageType = '{}:ISO8583_1987';
+      CREATE LASTCHILD OF OutputRoot DOMAIN('DFDL');
+      DECLARE InRef REFERENCE TO InputRoot;
+      CALL RemoveUnrequiredXMLAttributes(InRef);
+      SET OutputRoot.DFDL = InRef.XMLNSC;
+      CREATE NEXTSIBLING OF OutputRoot.DFDL.ISO8583_1987.MTI_MessageOrigin NAME 'PrimaryBitmap';
+      DECLARE DFDLPointer REFERENCE TO OutputRoot.DFDL.ISO8583_1987.PrimaryBitmap;
+
+      CALL PopulatePrimaryBitmap(DFDLPointer);
+
+      DECLARE SecondaryBitmap BOOLEAN FALSE;
+      IF CAST(SUBSTRING(FIELDNAME(OutputRoot.DFDL.ISO8583_1987.*[<]) AFTER '_') AS INT) > 64 THEN
+         SET SecondaryBitmap = TRUE;
+      END IF;
+
+      IF SecondaryBitmap THEN
+         -- This means a SecondaryBitmap will be required
+         CREATE NEXTSIBLING OF OutputRoot.DFDL.ISO8583_1987.PrimaryBitmap NAME 'SecondaryBitmap';         
+         MOVE DFDLPointer TO OutputRoot.DFDL.ISO8583_1987.SecondaryBitmap;
+         CALL PopulateSecondaryBitmap(DFDLPointer);
+
+          -- SecondaryBitmap is present, so set Bit001 to 1
+          SET OutputRoot.DFDL.ISO8583_1987.PrimaryBitmap.Bit001 = 1;
+      ELSE
+         MOVE DFDLPointer TO OutputRoot.DFDL.ISO8583_1987.PrimaryBitmap;
+          -- SecondaryBitmap is not present. Bit001 will already be initialised to 0.
+      END IF;
+
+      -- Having created the Bitmap structures with all bits set to 0, now set the Bit values ...
+      CALL UpdateBitmapsBasedOnAvailableFields(DFDLPointer);
+
+      RETURN TRUE;
+   END;
+
+   CREATE PROCEDURE GenerateThreeDigitIndex(IN IndexInt INTEGER, OUT IndexChar CHAR)
+   BEGIN
+      SET IndexChar =
+      CASE
+         WHEN IndexInt < 10 THEN ('00' || CAST(IndexInt AS CHAR))
+         WHEN IndexInt < 100 THEN ('0' || CAST(IndexInt AS CHAR))
+         ELSE CAST(IndexInt AS CHAR)
+      END;
+   END;
+
+   CREATE PROCEDURE RemoveUnrequiredXMLAttributes(INOUT InRef REFERENCE)
+   BEGIN
+      SET InRef.XMLNSC.*:XmlDeclaration = NULL;
+      DECLARE NumberRootAttributes INTEGER CARDINALITY(InRef.XMLNSC.ISO8583_1987.(XMLNSC.Attribute)*[]);
+      DECLARE I1 INTEGER 1;
+      WHILE I1 <= NumberRootAttributes DO
+         SET InRef.XMLNSC.ISO8583_1987.(XMLNSC.Attribute)*[1] = NULL;
+         SET I1 = I1 + 1;
+      END WHILE;
+   END;
+
+   CREATE PROCEDURE PopulatePrimaryBitmap(INOUT DFDLPointer REFERENCE)
+   BEGIN
+      DECLARE I2 INTEGER 1;
+      DECLARE IndexChar CHAR;
+      -- Create PrimaryBitmap structure, with all bits set to 0
+      WHILE I2 < 65 DO
+         CALL GenerateThreeDigitIndex(I2,IndexChar);
+         CREATE LASTCHILD OF DFDLPointer NAME ('Bit' || IndexChar) VALUE 0;
+         SET I2 = I2 + 1;
+      END WHILE;
+   END;
+
+   CREATE PROCEDURE PopulateSecondaryBitmap(INOUT DFDLPointer REFERENCE)
+   BEGIN
+      DECLARE J INTEGER 65;
+      DECLARE IndexChar CHAR;
+      WHILE J < 129 DO
+         -- Create SecondaryBitmap structure, with all bits set to 0
+         CALL GenerateThreeDigitIndex(J,IndexChar);
+         CREATE LASTCHILD OF DFDLPointer NAME ('Bit' || IndexChar) VALUE 0;
+         SET J = J + 1;
+      END WHILE;
+   END;
+
+   CREATE PROCEDURE UpdateBitmapsBasedOnAvailableFields(INOUT DFDLPointer REFERENCE)
+   BEGIN
+      -- Loop over the fields which are present to update the Bitmaps ...
+      MOVE DFDLPointer NEXTSIBLING;
+      WHILE LASTMOVE(DFDLPointer) DO
+         DECLARE CurrentFieldName CHAR FIELDNAME(DFDLPointer);
+         DECLARE BitName CHAR ('Bit' || SUBSTRING(CurrentFieldName AFTER '_'));
+         IF CAST(SUBSTRING(CurrentFieldName AFTER '_') AS INT) < 65 THEN
+            -- Current field relates to PrimaryBitmap
+            SET OutputRoot.DFDL.ISO8583_1987.PrimaryBitmap.{BitName} = 1;
+         ELSE
+            -- Current field relates to SecondaryBitmap
+            SET OutputRoot.DFDL.ISO8583_1987.SecondaryBitmap.{BitName} = 1;            
+         END IF;
+         MOVE DFDLPointer NEXTSIBLING;
+      END WHILE;      
+   END;
+
+END MODULE;
