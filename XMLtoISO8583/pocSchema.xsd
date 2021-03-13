@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://com.ibm.poc.TO.saferpayment" xmlns:tns="http://com.ibm.poc.TO.saferpayment" elementFormDefault="qualified">
+
+    <complexType name="IRIS">
+    	<sequence>
+    		<element name="TIMESTAMP" type="dateTime"></element>
+    		<element name="AMOUNT" type="string"></element>
+    		<element name="DEBIT_CARD_NO" type="string"></element>
+    		<element name="TERMINAL_TYPE" type="string"></element>
+    		<element name="REQUEST_TYPE" type="string"></element>
+    		<element name="MERCHANT_NUMBER" type="string"></element>
+    		<element name="MERCHANT_CATEGORY_CODE" type="string"></element>
+    		<element name="MERCHANT_NAME" type="string"></element>
+    		<element name="MERCHANT_CITY" type="string"></element>
+    		<element name="MERCHANT_COUNTRY" type="string"></element>
+    		<element name="CUST_BNI_ID_NO" type="string"></element>
+    		<element name="ATMID" type="string"></element>
+    		<element name="BANKING_TYPE" type="string"></element>
+    		<element name="SP_REQUIREMENT" type="string"></element>
+    		<element name="TRANSACTION_TYPE" type="string"></element>
+    	</sequence>
+    	<attribute name="Version" type="string"></attribute>
+    	<attribute name="Message" type="string"></attribute>
+    	<attribute name="MessageTypeId" type="string"></attribute>
+    	<attribute name="MessageID" type="string"></attribute>
+    </complexType>
+
+    <element name="IRIS" type="tns:IRIS"></element>
+</schema>

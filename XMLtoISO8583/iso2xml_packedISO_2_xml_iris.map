@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
+    <input path="mbsharedlib://ISO8583/1987/ISO8583_1987.xsd"/>
+    <output path="/pocSchema.xsd"/>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="iso2xml_packedISO_2_xml_iris">
+        <input path="mb:msg(ISO8583_1987,assembly,DFDL,Properties)" var="ComIbmMessageAssembly_ISO8583_1987"/>
+        <output namespace="http://com.ibm.poc.TO.saferpayment" path="mb:msg(IRIS,assembly,XMLNSC,Properties)" var="MessageAssembly"/>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/TransmissionDatetime_007"/>
+            <output path="$MessageAssembly/IRIS/TIMESTAMP"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/AmountTransaction_004"/>
+            <output path="$MessageAssembly/IRIS/AMOUNT"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/PrimaryAccountNumber_002"/>
+            <output path="$MessageAssembly/IRIS/DEBIT_CARD_NO"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/FileUpdateCode_091"/>
+            <output path="$MessageAssembly/IRIS/TERMINAL_TYPE"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/ServiceIndicator_094"/>
+            <output path="$MessageAssembly/IRIS/REQUEST_TYPE"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/CardAcceptorIdentificationCode_042"/>
+            <output path="$MessageAssembly/IRIS/MERCHANT_NUMBER"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MerchantType_018"/>
+            <output path="$MessageAssembly/IRIS/MERCHANT_CATEGORY_CODE"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/Payee_098"/>
+            <output path="$MessageAssembly/IRIS/MERCHANT_NAME"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/CardAcceptorNameLocation_043"/>
+            <output path="$MessageAssembly/IRIS/MERCHANT_CITY"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/CurrencyCodeSettlement_050"/>
+            <output path="$MessageAssembly/IRIS/MERCHANT_COUNTRY"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/SecurityRelatedControlInformation_053"/>
+            <output path="$MessageAssembly/IRIS/CUST_BNI_ID_NO"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/CardAcceptorTerminalIdentification_041"/>
+            <output path="$MessageAssembly/IRIS/ATMID"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MessageSecurityCode_096"/>
+            <output path="$MessageAssembly/IRIS/BANKING_TYPE"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/RetrievalReferenceNumber_037"/>
+            <output path="$MessageAssembly/IRIS/SP_REQUIREMENT"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/NetworkInternationalIdentifier_024"/>
+            <output path="$MessageAssembly/IRIS/TRANSACTION_TYPE"/>
+        </move>
+        <assign value="10">
+            <output path="$MessageAssembly/IRIS/@MessageTypeId"/>
+        </assign>
+        <assign value="1">
+            <output path="$MessageAssembly/IRIS/@Version"/>
+        </assign>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/Properties"/>
+            <output path="$MessageAssembly/Properties"/>
+        </move>
+        <assign value="ModelRequest">
+            <output path="$MessageAssembly/IRIS/@Message"/>
+        </assign>
+        <assign value="10">
+            <output path="$MessageAssembly/IRIS/@MessageID"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>
