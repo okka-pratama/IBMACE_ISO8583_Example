@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <xsd:element name="Primary_account_number" type="xsd:string"/>
-  <xsd:element name="Card_acceptor_identification_code" type="xsd:string"/>
-  <xsd:element name="Amount_transaction" type="xsd:string"/>
-  <xsd:element name="Function_code" type="xsd:string"/>
-  <xsd:element name="Message_security_code" type="xsd:string"/>
-  <xsd:element name="Service_indicator" type="xsd:string"/>
-  <xsd:element name="Merchant_Type" type="xsd:string"/>
-  <xsd:element name="IRIS">
+  <xsd:element name="IRIS2">
     <xsd:complexType>
       <xsd:sequence>
         <xsd:element ref="Date_and_time_transmission"/>
@@ -39,4 +32,14 @@
   <xsd:element name="Security_related_control_information" type="xsd:string"/>
   <xsd:element name="Payee" type="xsd:string"/>
   <xsd:element name="Retrieval_reference_number" type="xsd:string"/>
+  <xsd:element name="Primary_account_number" type="xsd:string"/>
+  <xsd:element name="Card_acceptor_identification_code" type="xsd:string"/>
+  <xsd:element name="Amount_transaction" type="xsd:string"/>
+  <xsd:element name="Function_code" type="xsd:string"/>
+  <xsd:element name="Message_security_code" type="xsd:string"/>
+  <xsd:element name="Service_indicator" type="xsd:string"/>
+  <xsd:element name="Merchant_Type" type="xsd:string"/>
+  
+  
+
 </xsd:schema>
