@@ -29,17 +29,10 @@
         <assign value="0">
             <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/MTI_MessageOrigin"/>
         </assign>
-        <expression>
+        <move>
             <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Date_and_time_transmission" var="Date_and_time_transmission"/>
             <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/TransmissionDatetime_007"/>
-            <code lang="xpath">fn:concat(
-	fn:substring($Date_and_time_transmission,1,2), 
-	fn:substring($Date_and_time_transmission,4,2), 
-	fn:substring($Date_and_time_transmission,12,2),
-	fn:substring($Date_and_time_transmission,15,2),
-	fn:substring($Date_and_time_transmission,18,2)
-)</code>
-        </expression>
+        </move>
         <convert defaultValue="0.0">
             <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Amount_transaction"/>
             <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/AmountTransaction_004"/>
