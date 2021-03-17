@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
-    <input path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var"/>
-    <input path="mbsharedlib://ISO8583/1987/ISO8583_1987.xsd" var="var1"/>
-    <output path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var2"/>
-    <output path="/IRIS.xsd" var="var3"/>
+    <input path="mbsharedlib://ISO8583/1987/ISO8583_1987.xsd"/>
+    <output path="/IRIS.xsd"/>
     <namespaces>
         <namespace kind="supplement" prefix="out" uri="http://com.ibm.poc.TO.saferpayment"/>
     </namespaces>
     <generation engine="xquery"/>
-    <mappingDeclaration name="iso2xml_packedISO_2_xml_iris">
-        <input path="$var/mb:env(Environment)" var="Environment"/>
-        <input path="$var1/mb:msg(ISO8583_1987,assembly,DFDL,Properties)" var="ComIbmMessageAssembly_ISO8583_1987"/>
-        <output path="$var2/mb:env(Environment)" var="Environment1"/>
-        <output path="$var3/mb:msg(IRIS,assembly,XMLNSC,Properties)" var="MessageAssembly"/>
-        <passthrough>
-            <input path="$Environment/."/>
-            <output path="$Environment1/."/>
-            <updates/>
-        </passthrough>
-        <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/Properties"/>
-            <output path="$MessageAssembly/Properties"/>
-        </move>
+    <mappingDeclaration name="iso2xml_unpackedISO_2_xml_iris">
+        <input path="mb:msg(ISO8583_1987,assembly,DFDL,Properties)" var="ComIbmMessageAssembly_ISO8583_1987"/>
+        <output path="mb:msg(IRIS,assembly,XMLNSC,Properties)" var="MessageAssembly"/>
+        <assign value="ModelRequest">
+            <output path="$MessageAssembly/IRIS/@Message"/>
+        </assign>
+        <assign value="1">
+            <output path="$MessageAssembly/IRIS/@Version"/>
+        </assign>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/TransmissionDatetime_007"/>
             <output path="$MessageAssembly/IRIS/TIMESTAMP"/>
@@ -36,14 +29,6 @@
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/FileUpdateCode_091"/>
             <output path="$MessageAssembly/IRIS/TERMINAL_TYPE"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/ServiceIndicator_094"/>
-            <output path="$MessageAssembly/IRIS/REQUEST_TYPE"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/CardAcceptorIdentificationCode_042"/>
-            <output path="$MessageAssembly/IRIS/MERCHANT_NUMBER"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MerchantType_018"/>
@@ -70,6 +55,14 @@
             <output path="$MessageAssembly/IRIS/ATMID"/>
         </move>
         <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/CardAcceptorIdentificationCode_042"/>
+            <output path="$MessageAssembly/IRIS/MERCHANT_NUMBER"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/ServiceIndicator_094"/>
+            <output path="$MessageAssembly/IRIS/REQUEST_TYPE"/>
+        </move>
+        <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MessageSecurityCode_096"/>
             <output path="$MessageAssembly/IRIS/BANKING_TYPE"/>
         </move>
@@ -85,11 +78,5 @@
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/NetworkInternationalIdentifier_024"/>
             <output path="$MessageAssembly/IRIS/@MessageTypeId"/>
         </move>
-        <assign value="1">
-            <output path="$MessageAssembly/IRIS/@Version"/>
-        </assign>
-        <assign value="ModelRequest">
-            <output path="$MessageAssembly/IRIS/@Message"/>
-        </assign>
     </mappingDeclaration>
 </mappingRoot>

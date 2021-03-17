@@ -6,7 +6,7 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/XMLtoISO8583/icons/full/obj16/iso2xml.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/XMLtoISO8583/icons/full/obj30/iso2xml.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="146,152" inputDirectory="/tmp/iso8583_in" messageDomainProperty="DFDL" messageSetProperty="{ISO8583}" messageTypeProperty="{}:ISO8583_1987">
+      <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="146,152" inputDirectory="/tmp/iso8583_PACKED_in" messageDomainProperty="DFDL" messageSetProperty="{ISO8583}" messageTypeProperty="{}:ISO8583_1987">
         <translation xmi:type="utility:ConstantString" string="File Input"/>
       </nodes>
       <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="811,145" outputDirectory="/tmp/file_out" outputFilename="out.xml" outputMode="archiveAndReplaceWithTimestamp">
@@ -15,8 +15,16 @@
       <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="352,164" mappingExpression="msl://{default}#iso2xml_packedISO_2_xml_iris">
         <translation xmi:type="utility:ConstantString" string="packedISO_2_xml_iris"/>
       </nodes>
+      <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="124,285" inputDirectory="/tmp/iso8583_UNPACKED_in" messageDomainProperty="DFDL" messageSetProperty="{ISO8583}" messageTypeProperty="{}:ISO8583_1987_Unpacked">
+        <translation xmi:type="utility:ConstantString" string="File Input Unpacked"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="409,288" mappingExpression="msl://{default}#iso2xml_unpackedISO_2_xml_iris">
+        <translation xmi:type="utility:ConstantString" string="unpacked_2_iris"/>
+      </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>
