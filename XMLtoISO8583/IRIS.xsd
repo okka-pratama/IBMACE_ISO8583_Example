@@ -40,7 +40,7 @@
   <xsd:element name="Service_indicator" type="xsd:string"/>
   <xsd:element name="Merchant_Type" type="xsd:string"/>
   
-    <xsd:element name="TIMESTAMP" type="xsd:dateTime"></xsd:element>
+    <xsd:element name="TIMESTAMP" type="xsd:string"></xsd:element>
     <xsd:element name="AMOUNT" type="xsd:string"></xsd:element>
     <xsd:element name="DEBIT_CARD_NO" type="xsd:string"></xsd:element>
     <xsd:element name="TERMINAL_TYPE" type="xsd:string"></xsd:element>

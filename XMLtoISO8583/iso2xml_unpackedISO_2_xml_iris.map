@@ -14,10 +14,21 @@
         <assign value="1">
             <output path="$MessageAssembly/IRIS/@Version"/>
         </assign>
-        <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/TransmissionDatetime_007"/>
+        <expression>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/TransmissionDatetime_007" var="TransmissionDatetime_007"/>
             <output path="$MessageAssembly/IRIS/TIMESTAMP"/>
-        </move>
+            <code lang="xpath">fn:concat(
+	fn:substring($TransmissionDatetime_007,1,2), 
+	".",
+	fn:substring($TransmissionDatetime_007,3,2),
+	".2021 ",
+	fn:substring($TransmissionDatetime_007,5,2),
+	":",
+	fn:substring($TransmissionDatetime_007,7,2),
+	":",
+	fn:substring($TransmissionDatetime_007,9,2)
+)</code>
+        </expression>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/AmountTransaction_004"/>
             <output path="$MessageAssembly/IRIS/AMOUNT"/>
