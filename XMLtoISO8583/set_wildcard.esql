@@ -1,0 +1,10 @@
+
+
+CREATE COMPUTE MODULE set_wildcard
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot = InputRoot;
+		SET OutputLocalEnvironment.Wildcard.WildcardMatch = InputRoot.XMLNSC.IRIS.MessageID;
+		RETURN TRUE;
+	END;
+END MODULE;
