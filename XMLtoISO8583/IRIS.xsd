@@ -40,6 +40,49 @@
   <xsd:element name="Service_indicator" type="xsd:string"/>
   <xsd:element name="Merchant_Type" type="xsd:string"/>
   
+    <xsd:element name="TIMESTAMP" type="xsd:dateTime"></xsd:element>
+    <xsd:element name="AMOUNT" type="xsd:string"></xsd:element>
+    <xsd:element name="DEBIT_CARD_NO" type="xsd:string"></xsd:element>
+    <xsd:element name="TERMINAL_TYPE" type="xsd:string"></xsd:element>
+    <xsd:element name="REQUEST_TYPE" type="xsd:string"></xsd:element>
+    <xsd:element name="MERCHANT_NUMBER" type="xsd:string"></xsd:element>
+    <xsd:element name="MERCHANT_CATEGORY_CODE" type="xsd:string"></xsd:element>
+    <xsd:element name="MERCHANT_NAME" type="xsd:string"></xsd:element>
+    <xsd:element name="MERCHANT_CITY" type="xsd:string"></xsd:element>
+    <xsd:element name="MERCHANT_COUNTRY" type="xsd:string"></xsd:element>
+    <xsd:element name="CUST_BNI_ID_NO" type="xsd:string"></xsd:element>
+    <xsd:element name="ATMID" type="xsd:string"></xsd:element>
+    <xsd:element name="BANKING_TYPE" type="xsd:string"></xsd:element>
+    <xsd:element name="SP_REQUIREMENT" type="xsd:string"></xsd:element>
+    <xsd:element name="TRANSACTION_TYPE" type="xsd:string"></xsd:element>
+
+
+    <xsd:element name="IRIS">
+	    
+        <xsd:complexType>
+	    	<xsd:sequence>
+	    		<xsd:element ref="TIMESTAMP" />
+	    		<xsd:element ref="AMOUNT" />
+	    		<xsd:element ref="DEBIT_CARD_NO" />
+	    		<xsd:element ref="TERMINAL_TYPE" />
+	    		<xsd:element ref="REQUEST_TYPE" />
+	    		<xsd:element ref="MERCHANT_NUMBER" />
+	    		<xsd:element ref="MERCHANT_CATEGORY_CODE" />
+	    		<xsd:element ref="MERCHANT_NAME" />
+	    		<xsd:element ref="MERCHANT_CITY" />
+	    		<xsd:element ref="MERCHANT_COUNTRY" />
+	    		<xsd:element ref="CUST_BNI_ID_NO" />
+	    		<xsd:element ref="ATMID" />
+	    		<xsd:element ref="BANKING_TYPE" />
+	    		<xsd:element ref="SP_REQUIREMENT" />
+	    		<xsd:element ref="TRANSACTION_TYPE" />
+	    	</xsd:sequence>
+	    	<xsd:attribute name="Version" type="xsd:string"/>
+	    	<xsd:attribute name="Message" type="xsd:string"/>
+	    	<xsd:attribute name="MessageTypeId" type="xsd:string"/>
+	    	<xsd:attribute name="MessageID" type="xsd:string"/>
+	    </xsd:complexType>
+    </xsd:element>
   
 
 </xsd:schema>
