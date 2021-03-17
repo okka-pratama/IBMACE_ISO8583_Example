@@ -61,10 +61,11 @@
             <input path="$MessageAssembly/IRIS2/Payee"/>
             <output path="$MessageAssembly1/ISO8583_1987/Payee_098"/>
         </move>
-        <move>
-            <input path="$MessageAssembly/IRIS2/Card_acceptor_name"/>
+        <expression>
+            <input path="$MessageAssembly/IRIS2/Card_acceptor_name" var="Card_acceptor_name"/>
             <output path="$MessageAssembly1/ISO8583_1987/CardAcceptorNameLocation_043"/>
-        </move>
+            <code lang="xpath">fn:substring(fn:concat($Card_acceptor_name ,'                                        ') ,1, 40)</code>
+        </expression>
         <move>
             <input path="$MessageAssembly/IRIS2/Currency_code_settlement"/>
             <output path="$MessageAssembly1/ISO8583_1987/CurrencyCodeSettlement_050"/>
