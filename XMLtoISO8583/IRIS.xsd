@@ -1,44 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <xsd:element name="IRIS2">
-    <xsd:complexType>
-      <xsd:sequence>
-        <xsd:element ref="Date_and_time_transmission"/>
-        <xsd:element ref="Amount_transaction"/>
-        <xsd:element ref="Primary_account_number"/>
-        <xsd:element ref="File_update_code"/>
-        <xsd:element ref="Service_indicator"/>
-        <xsd:element ref="Card_acceptor_identification_code"/>
-        <xsd:element ref="Merchant_Type"/>
-        <xsd:element ref="Payee"/>
-        <xsd:element ref="Card_acceptor_name"/>
-        <xsd:element ref="Currency_code_settlement"/>
-        <xsd:element ref="Security_related_control_information"/>
-        <xsd:element ref="Card_acceptor_terminal_identification"/>
-        <xsd:element ref="Message_security_code"/>
-        <xsd:element ref="Retrieval_reference_number"/>
-        <xsd:element ref="Function_code"/>
-      </xsd:sequence>
-      <xsd:attribute name="Message" type="xsd:string"/>
-      <xsd:attribute name="Version" type="xsd:string"/>
-      <xsd:attribute name="MessageTypeId" type="xsd:string"/>
-      <xsd:attribute name="MessageID" type="xsd:string"/>
-    </xsd:complexType>
-  </xsd:element>
-  <xsd:element name="Date_and_time_transmission" type="xsd:dateTime"/>
-  <xsd:element name="Card_acceptor_terminal_identification" type="xsd:string"/>
-  <xsd:element name="Card_acceptor_name" type="xsd:string"/>
-  <xsd:element name="File_update_code" type="xsd:string"/>
-  <xsd:element name="Currency_code_settlement" type="xsd:string"/>
-  <xsd:element name="Security_related_control_information" type="xsd:string"/>
-  <xsd:element name="Payee" type="xsd:string"/>
-  <xsd:element name="Retrieval_reference_number" type="xsd:string"/>
-  <xsd:element name="Primary_account_number" type="xsd:string"/>
-  <xsd:element name="Card_acceptor_identification_code" type="xsd:string"/>
-  <xsd:element name="Amount_transaction" type="xsd:string"/>
-  <xsd:element name="Function_code" type="xsd:string"/>
-  <xsd:element name="Message_security_code" type="xsd:string"/>
-  <xsd:element name="Service_indicator" type="xsd:string"/>
-  <xsd:element name="Merchant_Type" type="xsd:string"/>
   
     <xsd:element name="TIMESTAMP" type="xsd:string"></xsd:element>
     <xsd:element name="AMOUNT" type="xsd:string"></xsd:element>
@@ -88,5 +48,37 @@
 	    </xsd:complexType>
     </xsd:element>
   
+  
+    <xsd:complexType name="IRIS2ISO">
+  	<xsd:sequence>
+  		<xsd:element name="Primary_account_number" type="xsd:string" />
+  		<xsd:element name="Point_of_service_capture_code"
+  			type="xsd:string" />
+  		<xsd:element name="Card_acceptor_identification_code"
+  			type="xsd:string" />
+  		<xsd:element name="Amount_transaction" type="xsd:string" />
+  		<xsd:element name="Message_security_code" type="xsd:string" />
+  		<xsd:element name="Message_number" type="xsd:string" />
+  		<xsd:element name="Merchant_Type" type="xsd:string" />
+  		<xsd:element name="Date_and_time_transmission"
+  			type="xsd:string" />
+  		<xsd:element name="Point_of_service_condition_code"
+  			type="xsd:string" />
+  		<xsd:element name="Card_acceptor_name" type="xsd:string" />
+  		<xsd:element name="Capture_date" type="xsd:string" />
+  		<xsd:element name="Currency_code_settlement"
+  			type="xsd:string" />
+  		<xsd:element name="Security_related_control_information"
+  			type="xsd:string" />
+  		<xsd:element name="Payee" type="xsd:string" />
+  		<xsd:element name="Amount_settlement" type="xsd:string" />
+  		<xsd:element name="Retrieval_reference_number" type="xsd:string"></xsd:element>
+  	</xsd:sequence>
+  	<xsd:attribute name="Message" type="xsd:string"/>
+      <xsd:attribute name="Version" type="xsd:string"/>
+      <xsd:attribute name="MessageTypeId" type="xsd:string"/>
+      <xsd:attribute name="MessageID" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="IRIS2ISO" type="IRIS2ISO"></xsd:element>
 
 </xsd:schema>

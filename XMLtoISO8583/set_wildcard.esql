@@ -4,7 +4,11 @@ CREATE COMPUTE MODULE set_wildcard
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
 		SET OutputRoot = InputRoot;
-		SET OutputLocalEnvironment.Wildcard.WildcardMatch = InputRoot.XMLNSC.IRIS.MessageID;
+		DECLARE nowTime CHARACTER CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMdd-HHmmssSSSSSS');
+		SET OutputLocalEnvironment.Wildcard.WildcardMatch = nowTime;
+		
+		DECLARE msgSecCode CHARACTER CAST(InputRoot.XMLNSC.IRIS.Message_security_code AS BLOB CCSID InputRoot.Properties.CodedCharSetId);
+		SET OutputRoot.XMLNSC.IRIS.Message_security_code = SUBSTRING(msgSecCode FROM 3 FOR LENGTH(msgSecCode) - 3);
 		RETURN TRUE;
 	END;
 END MODULE;
