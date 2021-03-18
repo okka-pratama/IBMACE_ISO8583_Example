@@ -15,6 +15,11 @@
     <xsd:element name="BANKING_TYPE" type="xsd:string"></xsd:element>
     <xsd:element name="SP_REQUIREMENT" type="xsd:string"></xsd:element>
     <xsd:element name="TRANSACTION_TYPE" type="xsd:string"></xsd:element>
+    <xsd:element name="CREDIT_CARD_NO" type="xsd:string"></xsd:element>
+    <xsd:element name="POSEntryMode" type="xsd:string"></xsd:element>
+    <xsd:element name="MTID" type="xsd:string"></xsd:element>
+    <xsd:element name="CARD_LIMIT" type="xsd:string"></xsd:element>
+    <xsd:element name="ECI" type="xsd:string"></xsd:element>
 
 
     <xsd:element name="IRIS">
@@ -22,20 +27,19 @@
         <xsd:complexType>
 	    	<xsd:sequence>
 	    		<xsd:element ref="TIMESTAMP" />
+	    		<xsd:element ref="CREDIT_CARD_NO" />
 	    		<xsd:element ref="AMOUNT" />
-	    		<xsd:element ref="DEBIT_CARD_NO" />
-	    		<xsd:element ref="TERMINAL_TYPE" />
-	    		<xsd:element ref="REQUEST_TYPE" />
-	    		<xsd:element ref="MERCHANT_NUMBER" />
+	    		<xsd:element ref="BANKING_TYPE" />
 	    		<xsd:element ref="MERCHANT_CATEGORY_CODE" />
+	    		<xsd:element ref="MERCHANT_NUMBER" />
 	    		<xsd:element ref="MERCHANT_NAME" />
 	    		<xsd:element ref="MERCHANT_CITY" />
 	    		<xsd:element ref="MERCHANT_COUNTRY" />
-	    		<xsd:element ref="CUST_BNI_ID_NO" />
-	    		<xsd:element ref="ATMID" />
-	    		<xsd:element ref="BANKING_TYPE" />
 	    		<xsd:element ref="SP_REQUIREMENT" />
-	    		<xsd:element ref="TRANSACTION_TYPE" />
+	    		<xsd:element ref="POSEntryMode" />
+	    		<xsd:element ref="MTID" />
+	    		<xsd:element ref="CARD_LIMIT" />
+	    		<xsd:element ref="ECI" />
 	    	</xsd:sequence>
 	    	<xsd:attribute name="Version" type="xsd:string"/>
 	    	<xsd:attribute name="Message" type="xsd:string"/>

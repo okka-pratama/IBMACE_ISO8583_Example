@@ -36,14 +36,6 @@
             <output path="$MessageAssembly/IRIS/AMOUNT"/>
         </move>
         <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/PrimaryAccountNumber_002"/>
-            <output path="$MessageAssembly/IRIS/DEBIT_CARD_NO"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/FileUpdateCode_091"/>
-            <output path="$MessageAssembly/IRIS/TERMINAL_TYPE"/>
-        </move>
-        <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MerchantType_018"/>
             <output path="$MessageAssembly/IRIS/MERCHANT_CATEGORY_CODE"/>
         </move>
@@ -60,36 +52,40 @@
             <output path="$MessageAssembly/IRIS/MERCHANT_COUNTRY"/>
         </move>
         <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/SecurityRelatedControlInformation_053"/>
-            <output path="$MessageAssembly/IRIS/CUST_BNI_ID_NO"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/CardAcceptorTerminalIdentification_041"/>
-            <output path="$MessageAssembly/IRIS/ATMID"/>
-        </move>
-        <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/CardAcceptorIdentificationCode_042"/>
             <output path="$MessageAssembly/IRIS/MERCHANT_NUMBER"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/ServiceIndicator_094"/>
-            <output path="$MessageAssembly/IRIS/REQUEST_TYPE"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MessageSecurityCode_096"/>
             <output path="$MessageAssembly/IRIS/BANKING_TYPE"/>
         </move>
         <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/RetrievalReferenceNumber_037"/>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/NetworkInternationalIdentifier_024"/>
+            <output path="$MessageAssembly/IRIS/@MessageTypeId"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/PrimaryAccountNumber_002"/>
+            <output path="$MessageAssembly/IRIS/CREDIT_CARD_NO"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/PointOfServiceCaptureCode_026"/>
             <output path="$MessageAssembly/IRIS/SP_REQUIREMENT"/>
         </move>
         <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/NetworkInternationalIdentifier_024"/>
-            <output path="$MessageAssembly/IRIS/TRANSACTION_TYPE"/>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/SecurityRelatedControlInformation_053"/>
+            <output path="$MessageAssembly/IRIS/POSEntryMode"/>
         </move>
         <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/NetworkInternationalIdentifier_024"/>
-            <output path="$MessageAssembly/IRIS/@MessageTypeId"/>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MessageNumber_071"/>
+            <output path="$MessageAssembly/IRIS/MTID"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/AmountSettlement_005"/>
+            <output path="$MessageAssembly/IRIS/CARD_LIMIT"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/PointOfServiceConditionCode_025"/>
+            <output path="$MessageAssembly/IRIS/ECI"/>
         </move>
     </mappingDeclaration>
 </mappingRoot>
