@@ -62,10 +62,10 @@
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/CurrencyCodeSettlement_050"/>
             <output path="$MessageAssembly/IRIS/MERCHANT_COUNTRY"/>
         </move>
-        <move>
+        <convert>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MessageSecurityCode_096"/>
             <output path="$MessageAssembly/IRIS/BANKING_TYPE"/>
-        </move>
+        </convert>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/NetworkInternationalIdentifier_024"/>
             <output path="$MessageAssembly/IRIS/@MessageTypeId"/>

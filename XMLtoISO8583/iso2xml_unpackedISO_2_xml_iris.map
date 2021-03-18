@@ -16,6 +16,7 @@
         </assign>
         <expression>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/TransmissionDatetime_007" var="TransmissionDatetime_007"/>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/DateCapture_017" var="DateCapture_017"/>
             <output path="$MessageAssembly/IRIS/TIMESTAMP"/>
             <code lang="xpath">fn:concat(
 	fn:substring($TransmissionDatetime_007,1,2), 
@@ -23,7 +24,7 @@
 	fn:substring($TransmissionDatetime_007,3,2),
 	".",
 	fn:substring($DateCapture_017,1,4),
-	":",
+	" ",
 	fn:substring($TransmissionDatetime_007,5,2),
 	":",
 	fn:substring($TransmissionDatetime_007,7,2),
@@ -56,7 +57,7 @@
             <output path="$MessageAssembly/IRIS/MERCHANT_NUMBER"/>
         </move>
         <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MessageSecurityCode_096"/>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MessageSecurityCode_096" var="MessageSecurityCode_096"/>
             <output path="$MessageAssembly/IRIS/BANKING_TYPE"/>
         </move>
         <move>
@@ -66,14 +67,6 @@
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/PrimaryAccountNumber_002"/>
             <output path="$MessageAssembly/IRIS/CREDIT_CARD_NO"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/PointOfServiceCaptureCode_026"/>
-            <output path="$MessageAssembly/IRIS/SP_REQUIREMENT"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/SecurityRelatedControlInformation_053"/>
-            <output path="$MessageAssembly/IRIS/POSEntryMode"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MessageNumber_071"/>
@@ -86,6 +79,14 @@
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/PointOfServiceConditionCode_025"/>
             <output path="$MessageAssembly/IRIS/ECI"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/RetrievalReferenceNumber_037"/>
+            <output path="$MessageAssembly/IRIS/SP_REQUIREMENT"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/PointOfServiceCaptureCode_026"/>
+            <output path="$MessageAssembly/IRIS/POSEntryMode"/>
         </move>
     </mappingDeclaration>
 </mappingRoot>

@@ -1,0 +1,17 @@
+<IRIS Message="ModelRequest" MessageID="90003" MessageTypeId="12" Version="1">
+<Date_and_time_transmission>1223164439</Date_and_time_transmission>
+<Primary_account_number>5489888800001234</Primary_account_number>
+<Amount_transaction>9900000</Amount_transaction>
+<Message_security_code>EDC</Message_security_code>
+<Merchant_Type>7995</Merchant_Type>
+<Card_acceptor_identification_code>12154580</Card_acceptor_identification_code>
+<Payee>RUSKI GAMING ONLINE</Payee>
+<Card_acceptor_name>MOSCOW</Card_acceptor_name>
+<Currency_code_settlement>RUS</Currency_code_settlement>
+<Point_of_service_capture_code>01</Point_of_service_capture_code>
+<Retrieval_reference_number>ISS02</Retrieval_reference_number>
+<Message_number>12</Message_number>
+<Amount_settlement>10000000</Amount_settlement>
+<Point_of_service_condition_code>05</Point_of_service_condition_code>
+<Capture_date>2020</Capture_date>
+</IRIS>
