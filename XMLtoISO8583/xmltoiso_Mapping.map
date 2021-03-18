@@ -3,91 +3,100 @@
     <output path="mbsharedlib://ISO8583/1987/ISO8583_1987_Unpacked.xsd" var="var"/>
     <generation engine="xquery"/>
     <mappingDeclaration name="xmltoiso_Mapping">
-        <input path="mb:msg(IRIS2,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_IRIS2"/>
-        <output path="$var/mb:msg(ISO8583_1987_Unpacked,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_ISO8583_1987_Unpacked"/>
+        <input path="mb:msg(IRIS2ISO,assembly,XMLNSC,Properties)" var="MessageAssembly"/>
+        <output path="$var/mb:msg(ISO8583_1987_Unpacked,assembly,XMLNSC,Properties)" var="MessageAssembly1"/>
         <move>
-            <input path="$ComIbmMessageAssembly_IRIS2/Properties"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/Properties"/>
+            <input path="$MessageAssembly/Properties"/>
+            <output path="$MessageAssembly1/Properties"/>
             <override>
                 <assign value="{ISO8583}">
-                    <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/Properties/MessageSet"/>
+                    <output path="$MessageAssembly1/Properties/MessageSet"/>
                 </assign>
                 <assign value="{}:ISO8583_1987_Unpacked">
-                    <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/Properties/MessageType"/>
+                    <output path="$MessageAssembly1/Properties/MessageType"/>
                 </assign>
             </override>
         </move>
+        <move automap="true">
+            <input path="$MessageAssembly/IRIS2ISO/Primary_account_number"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/PrimaryAccountNumber_002"/>
+        </move>
+        <move>
+            <input path="$MessageAssembly/IRIS2ISO/Point_of_service_capture_code" var="Point_of_service_capture_code"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/PointOfServiceCaptureCode_026"/>
+        </move>
+        <expression>
+            <input path="$MessageAssembly/IRIS2ISO/Card_acceptor_identification_code" var="Card_acceptor_identification_code"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/CardAcceptorIdentificationCode_042"/>
+            <code lang="xpath">fn:substring(fn:concat($Card_acceptor_identification_code ,'|||||||||||||||') ,1,15)</code>
+        </expression>
+        <convert defaultValue="00">
+            <input path="$MessageAssembly/IRIS2ISO/Message_security_code"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/MessageSecurityCode_096"/>
+        </convert>
+        <expression>
+            <input path="$MessageAssembly/IRIS2ISO/Message_number" var="Message_number"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/MessageNumber_071"/>
+            <code lang="xpath">fn:substring(fn:concat($Message_number ,'||||||||||||||') ,1,4)</code>
+        </expression>
+        <move automap="true">
+            <input path="$MessageAssembly/IRIS2ISO/Merchant_Type"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/MerchantType_018"/>
+        </move>
+        <move automap="true">
+            <input path="$MessageAssembly/IRIS2ISO/Date_and_time_transmission"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/TransmissionDatetime_007"/>
+        </move>
+        <move automap="true">
+            <input path="$MessageAssembly/IRIS2ISO/Point_of_service_condition_code"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/PointOfServiceConditionCode_025"/>
+        </move>
+        <expression>
+            <input path="$MessageAssembly/IRIS2ISO/Card_acceptor_name" var="Card_acceptor_name"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/CardAcceptorNameLocation_043"/>
+            <code lang="xpath">fn:substring(fn:concat($Card_acceptor_name ,'||||||||||||||||||||||||||||||||||||||||') ,1,40)</code>
+        </expression>
+        <move automap="true">
+            <input path="$MessageAssembly/IRIS2ISO/Capture_date"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/DateCapture_017"/>
+        </move>
+        <move automap="true">
+            <input path="$MessageAssembly/IRIS2ISO/Currency_code_settlement"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/CurrencyCodeSettlement_050"/>
+        </move>
+        <move automap="true">
+            <input path="$MessageAssembly/IRIS2ISO/Security_related_control_information"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/SecurityRelatedControlInformation_053"/>
+        </move>
+        <expression>
+            <input path="$MessageAssembly/IRIS2ISO/Payee" var="Payee"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/Payee_098"/>
+            <code lang="xpath">fn:substring(fn:concat($Payee ,'|||||||||||||||||||||||||') ,1,25)</code>
+        </expression>
+        <convert defaultValue="0.0">
+            <input path="$MessageAssembly/IRIS2ISO/Amount_settlement" var="Amount_settlement"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/AmountSettlement_005"/>
+        </convert>
         <assign value="0">
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/MTI_Version"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/MTI_Version"/>
         </assign>
         <assign value="1">
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/MTI_MessageClass"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/MTI_MessageClass"/>
+        </assign>
+        <assign value="2">
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/MTI_MessageFunction"/>
         </assign>
         <assign value="0">
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/MTI_MessageFunction"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/MTI_MessageOrigin"/>
         </assign>
-        <assign value="0">
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/MTI_MessageOrigin"/>
-        </assign>
-        <move>
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Date_and_time_transmission" var="Date_and_time_transmission"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/TransmissionDatetime_007"/>
-        </move>
         <convert defaultValue="0.0">
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Amount_transaction"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/AmountTransaction_004"/>
+            <input path="$MessageAssembly/IRIS2ISO/Amount_transaction" var="Amount_transaction"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/AmountTransaction_004"/>
         </convert>
-        <move>
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Primary_account_number"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/PrimaryAccountNumber_002"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/File_update_code"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/FileUpdateCode_091"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Service_indicator"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/ServiceIndicator_094"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Card_acceptor_identification_code"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/CardAcceptorIdentificationCode_042"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Merchant_Type"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/MerchantType_018"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Payee"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/Payee_098"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Card_acceptor_name"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/CardAcceptorNameLocation_043"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Currency_code_settlement"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/CurrencyCodeSettlement_050"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Security_related_control_information"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/SecurityRelatedControlInformation_053"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Card_acceptor_terminal_identification"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/CardAcceptorTerminalIdentification_041"/>
-        </move>
-        <convert defaultValue="00">
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Message_security_code"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/MessageSecurityCode_096"/>
-        </convert>
-        <move>
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Retrieval_reference_number"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/RetrievalReferenceNumber_037"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_IRIS2/IRIS2/Function_code"/>
-            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/NetworkInternationalIdentifier_024"/>
-        </move>
+        <expression>
+            <input path="$MessageAssembly/IRIS2ISO/Retrieval_reference_number" var="Retrieval_reference_number"/>
+            <output path="$MessageAssembly1/ISO8583_1987_Unpacked/RetrievalReferenceNumber_037"/>
+            <code lang="xpath">fn:substring(fn:concat($Retrieval_reference_number ,'||||||||||||') ,1,12)</code>
+        </expression>
     </mappingDeclaration>
 </mappingRoot>
