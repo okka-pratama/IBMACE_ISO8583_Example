@@ -1,27 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
-    <input path="mbsharedlib://ISO8583/1987/ISO8583_1987.xsd"/>
-    <output path="/IRIS.xsd"/>
+    <inlinedXMLSchema><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="MESSAGE_ID" type="xsd:string"/>
+</xsd:schema>]]></inlinedXMLSchema>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var1"/>
+    <input path="mbsharedlib://ISO8583/1987/ISO8583_1987.xsd" var="var2"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var3"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var4"/>
+    <output path="/IRIS.xsd" var="var5"/>
     <namespaces>
         <namespace kind="supplement" prefix="out" uri="http://com.ibm.poc.TO.saferpayment"/>
     </namespaces>
     <generation engine="xquery"/>
     <mappingDeclaration name="iso2xml_unpackedISO_2_xml_iris">
-        <input path="mb:msg(ISO8583_1987,assembly,DFDL,Properties)" var="ComIbmMessageAssembly_ISO8583_1987"/>
-        <output path="mb:msg(IRIS,assembly,XMLNSC,Properties)" var="MessageAssembly"/>
+        <input path="$var1/mb:env(Environment)" var="Environment">
+            <cast castType="userDefined" path="$Environment/Variables/any" qualifier="MESSAGE_ID" ref="var" var="any"/>
+        </input>
+        <input path="$var2/mb:msg(ISO8583_1987,assembly,DFDL,Properties)" var="ComIbmMessageAssembly_ISO8583_1987"/>
+        <output path="$var4/mb:env(Environment)" var="Environment1">
+            <cast castType="userDefined" path="$Environment1/Variables/any" qualifier="MESSAGE_ID" ref="var" var="any1"/>
+        </output>
+        <output path="$var5/mb:msg(IRIS,assembly,XMLNSC,Properties)" var="MessageAssembly"/>
+        <passthrough>
+            <input path="$Environment/."/>
+            <output path="$Environment1/."/>
+            <updates/>
+        </passthrough>
         <assign value="ModelRequest">
             <output path="$MessageAssembly/IRIS/@Message"/>
         </assign>
         <assign value="1">
             <output path="$MessageAssembly/IRIS/@Version"/>
+            <annotation key="$NON-PERSISTENT" value="2"/>
         </assign>
         <expression>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/TransmissionDatetime_007" var="TransmissionDatetime_007"/>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/DateCapture_017" var="DateCapture_017"/>
             <output path="$MessageAssembly/IRIS/TIMESTAMP"/>
+            <annotation key="$NON-PERSISTENT" value="2"/>
             <code lang="xpath">fn:concat(
-	fn:substring($TransmissionDatetime_007,1,2), 
-	".",
 	fn:substring($TransmissionDatetime_007,3,2),
+	".",
+	fn:substring($TransmissionDatetime_007,1,2), 
 	".",
 	fn:substring($DateCapture_017,1,4),
 	" ",
@@ -35,42 +55,42 @@
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/AmountTransaction_004"/>
             <output path="$MessageAssembly/IRIS/AMOUNT"/>
+            <annotation key="$NON-PERSISTENT" value="2"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MerchantType_018"/>
             <output path="$MessageAssembly/IRIS/MERCHANT_CATEGORY_CODE"/>
+            <annotation key="$NON-PERSISTENT" value="2"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/Payee_098"/>
             <output path="$MessageAssembly/IRIS/MERCHANT_NAME"/>
+            <annotation key="$NON-PERSISTENT" value="2"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/CardAcceptorNameLocation_043"/>
             <output path="$MessageAssembly/IRIS/MERCHANT_CITY"/>
+            <annotation key="$NON-PERSISTENT" value="2"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/CurrencyCodeSettlement_050"/>
             <output path="$MessageAssembly/IRIS/MERCHANT_COUNTRY"/>
+            <annotation key="$NON-PERSISTENT" value="2"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/CardAcceptorIdentificationCode_042"/>
             <output path="$MessageAssembly/IRIS/MERCHANT_NUMBER"/>
+            <annotation key="$NON-PERSISTENT" value="2"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MessageSecurityCode_096" var="MessageSecurityCode_096"/>
             <output path="$MessageAssembly/IRIS/BANKING_TYPE"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/NetworkInternationalIdentifier_024"/>
-            <output path="$MessageAssembly/IRIS/@MessageTypeId"/>
+            <annotation key="$NON-PERSISTENT" value="2"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/PrimaryAccountNumber_002"/>
             <output path="$MessageAssembly/IRIS/CREDIT_CARD_NO"/>
-        </move>
-        <move>
-            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MessageNumber_071"/>
-            <output path="$MessageAssembly/IRIS/MTID"/>
+            <annotation key="$NON-PERSISTENT" value="2"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/AmountSettlement_005"/>
@@ -83,10 +103,24 @@
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/RetrievalReferenceNumber_037"/>
             <output path="$MessageAssembly/IRIS/SP_REQUIREMENT"/>
+            <annotation key="$NON-PERSISTENT" value="2"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/PointOfServiceCaptureCode_026"/>
             <output path="$MessageAssembly/IRIS/POSEntryMode"/>
+            <annotation key="$NON-PERSISTENT" value="2"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MessageNumber_071"/>
+            <output path="$MessageAssembly/IRIS/MTID"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987/ISO8583_1987/MessageNumber_071"/>
+            <output path="$MessageAssembly/IRIS/@MessageTypeId"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/MESSAGE_ID"/>
+            <output path="$MessageAssembly/IRIS/@MessageID"/>
         </move>
     </mappingDeclaration>
 </mappingRoot>

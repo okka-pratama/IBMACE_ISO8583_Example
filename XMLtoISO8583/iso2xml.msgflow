@@ -10,7 +10,7 @@
       <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="146,152" inputDirectory="/tmp/iso8583_PACKED_in" messageDomainProperty="DFDL" messageSetProperty="{ISO8583}" messageTypeProperty="{}:ISO8583_1987">
         <translation xmi:type="utility:ConstantString" string="File Input"/>
       </nodes>
-      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="811,145" outputDirectory="/tmp/file_out" outputFilename="out.xml" outputMode="archiveAndReplaceWithTimestamp">
+      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="811,145" outputDirectory="/tmp/file_out" outputFilename="iris.xml" writeMode="writeInPlace" outputMode="archiveAndReplaceWithTimestamp" replaceDuplicateArchives="true">
         <translation xmi:type="utility:ConstantString" string="File Output"/>
       </nodes>
       <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="352,164" mappingExpression="msl://{default}#iso2xml_packedISO_2_xml_iris">
@@ -25,18 +25,21 @@
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="298,280" computeExpression="esql://routine/#iso2xml_Compute.Main" computeMode="exceptionAndMessage">
         <translation xmi:type="utility:ConstantString" string="Compute"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="652,262" computeExpression="esql://routine/#iso2xml_Compute1.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="587,273" computeExpression="esql://routine/#iso2xml_Compute1.Main">
         <translation xmi:type="utility:ConstantString" string="Compute1"/>
       </nodes>
       <nodes xmi:type="ComIbmTCPIPClientOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="791,250" connectionDetails="161.202.178.194:37911" closeOutputStream="true" modifyInputStream="reserveThenRelease">
         <translation xmi:type="utility:ConstantString" string="TCPIP Client Output"/>
+      </nodes>
+      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="734,314" outputDirectory="/tmp/file_xml_out/" outputFilename="iris.xml">
+        <translation xmi:type="utility:ConstantString" string="File Output1"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>

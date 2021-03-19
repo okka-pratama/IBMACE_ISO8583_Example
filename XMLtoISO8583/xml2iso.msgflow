@@ -6,10 +6,10 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/XMLtoISO8583/icons/full/obj16/xml2iso.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/XMLtoISO8583/icons/full/obj30/xml2iso.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="23,91" inputDirectory="/home/soaps/TestDir/input" messageDomainProperty="XMLNSC">
+      <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="23,91" inputDirectory="/tmp/xml_in" messageDomainProperty="XMLNSC">
         <translation xmi:type="utility:ConstantString" string="File Input"/>
       </nodes>
-      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="562,49" outputDirectory="/home/soaps/TestDir/output" outputFilename="iso8583_bnipoc_out_*.txt" outputMode="archiveAndReplaceWithTimestamp">
+      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="562,49" outputDirectory="/tmp/file_out" outputFilename="iso8583_bnipoc_out_*.txt" outputMode="archiveAndReplaceWithTimestamp">
         <translation xmi:type="utility:ConstantString" string="File Output"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="394,36" computeExpression="esql://routine/#xmltoiso_Compute.Main">

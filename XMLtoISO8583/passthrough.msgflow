@@ -9,7 +9,7 @@
       <nodes xmi:type="ComIbmWSInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="239,140" URLSpecifier="/passthrough">
         <translation xmi:type="utility:ConstantString" string="HTTP Input"/>
       </nodes>
-      <nodes xmi:type="ComIbmTCPIPClientOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="389,140" connectionDetails="192.168.154.76:37928" closeOutputStream="true" modifyInputStream="reserveThenRelease">
+      <nodes xmi:type="ComIbmTCPIPClientOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="389,140" connectionDetails="161.202.178.194:37911" closeOutputStream="true" modifyInputStream="reserveThenRelease">
         <translation xmi:type="utility:ConstantString" string="TCPIP Client Output"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
