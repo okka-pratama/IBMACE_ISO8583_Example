@@ -1,0 +1,11 @@
+
+
+CREATE COMPUTE MODULE passthrough_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot = InputRoot;
+		DECLARE nowTime CHARACTER CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMdd-HHmmssSSSSSS');
+		SET OutputLocalEnvironment.Wildcard.WildcardMatch = nowTime;
+		RETURN TRUE;
+	END;
+END MODULE;
