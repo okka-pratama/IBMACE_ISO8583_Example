@@ -11,6 +11,9 @@ CREATE COMPUTE MODULE iso2xml_Compute
 		DECLARE messageID TIMESTAMP;
 		SET Environment.Variables.MESSAGE_ID= CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMddHHmmss');
 		
+		DECLARE nowTime CHARACTER CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMdd-HHmmssSSSSSS');
+		SET OutputLocalEnvironment.Wildcard.WildcardMatch = nowTime;
+		
 		RETURN TRUE;
 	END;
 
