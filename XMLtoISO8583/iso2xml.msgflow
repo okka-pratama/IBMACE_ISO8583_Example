@@ -7,31 +7,31 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/XMLtoISO8583/icons/full/obj16/iso2xml.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/XMLtoISO8583/icons/full/obj30/iso2xml.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="146,152" inputDirectory="/tmp/iso8583_PACKED_in" messageDomainProperty="DFDL" messageSetProperty="{ISO8583}" messageTypeProperty="{}:ISO8583_1987">
+      <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="141,23" inputDirectory="/tmp/iso8583_PACKED_in" messageDomainProperty="DFDL" messageSetProperty="{ISO8583}" messageTypeProperty="{}:ISO8583_1987">
         <translation xmi:type="utility:ConstantString" string="File Input"/>
       </nodes>
-      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="811,145" outputDirectory="/tmp/file_out" outputFilename="iris.xml" writeMode="writeInPlace" outputMode="archiveAndReplaceWithTimestamp" replaceDuplicateArchives="true">
+      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="388,25" outputDirectory="/tmp/file_out" outputFilename="iris.xml" writeMode="writeInPlace" outputMode="archiveAndReplaceWithTimestamp" replaceDuplicateArchives="true">
         <translation xmi:type="utility:ConstantString" string="File Output"/>
       </nodes>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="352,164" mappingExpression="msl://{default}#iso2xml_packedISO_2_xml_iris">
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="219,19" mappingExpression="msl://{default}#iso2xml_packedISO_2_xml_iris">
         <translation xmi:type="utility:ConstantString" string="packedISO_2_xml_iris"/>
       </nodes>
-      <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="124,285" inputDirectory="/tmp/iso8583_UNPACKED_in" messageDomainProperty="DFDL" messageSetProperty="{ISO8583}" messageTypeProperty="{}:ISO8583_1987_Unpacked">
+      <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="112,159" inputDirectory="/tmp/iso8583_UNPACKED_in" messageDomainProperty="DFDL" messageSetProperty="{ISO8583}" messageTypeProperty="{}:ISO8583_1987_Unpacked">
         <translation xmi:type="utility:ConstantString" string="File Input Unpacked"/>
       </nodes>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="409,288" mappingExpression="msl://{default}#iso2xml_unpackedISO_2_xml_iris">
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="353,159" mappingExpression="msl://{default}#iso2xml_unpackedISO_2_xml_iris">
         <translation xmi:type="utility:ConstantString" string="unpacked_2_iris"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="298,280" computeExpression="esql://routine/#iso2xml_Compute.Main" computeMode="all">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="259,156" computeExpression="esql://routine/#iso2xml_Compute.Main" computeMode="all">
         <translation xmi:type="utility:ConstantString" string="Compute"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="587,273" computeExpression="esql://routine/#iso2xml_Compute1.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="487,159" computeExpression="esql://routine/#iso2xml_Compute1.Main">
         <translation xmi:type="utility:ConstantString" string="Compute1"/>
       </nodes>
-      <nodes xmi:type="ComIbmWSRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="736,284" URLSpecifier="http://161.202.178.194:37911">
+      <nodes xmi:type="ComIbmWSRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="603,157" URLSpecifier="http://161.202.178.194:37911">
         <translation xmi:type="utility:ConstantString" string="HTTP Request"/>
       </nodes>
-      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="879,291" outputDirectory="/tmp/file_out" outputFilename="iso8583_reply_*.txt">
+      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="734,150" outputDirectory="/tmp/file_out" outputFilename="iso8583_reply_*.txt">
         <translation xmi:type="utility:ConstantString" string="log"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
@@ -44,8 +44,11 @@
     </composition>
     <propertyOrganizer/>
     <stickyBoard>
-      <stickyNote location="937,133">
+      <stickyNote location="795,138">
         <body xmi:type="utility:ConstantString" string="Log the response"/>
+      </stickyNote>
+      <stickyNote location="487,13">
+        <body xmi:type="utility:ConstantString" string="ISO_8583 Packed (Unused)"/>
       </stickyNote>
     </stickyBoard>
   </eClassifiers>
