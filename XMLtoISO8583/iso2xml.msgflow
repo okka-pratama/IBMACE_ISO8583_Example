@@ -29,7 +29,11 @@
         <translation xmi:type="utility:ConstantString" string="Compute1"/>
       </nodes>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <nodes xmi:type="ComIbmWSRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="603,157" URLSpecifier="http://161.202.178.194:37911">
+=======
+      <nodes xmi:type="ComIbmWSRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="736,284" URLSpecifier="http://161.202.178.194:37911">
+>>>>>>> parent of 78216eb... Add Log4j
 =======
       <nodes xmi:type="ComIbmWSRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="736,284" URLSpecifier="http://161.202.178.194:37911">
 >>>>>>> parent of 78216eb... Add Log4j
