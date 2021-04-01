@@ -3,7 +3,9 @@
 CREATE COMPUTE MODULE iso2xml_Compute
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
+
 		SET OutputRoot = InputRoot;
+		SET Environment.Variables.RequestTime = InputLocalEnvironment.File.TimeStamp;
 		
 		DECLARE cRecord CHARACTER CAST(TRIM(InputRoot.DFDL.ISO8583_1987_Unpacked.MessageSecurityCode_096 )AS CHAR CCSID 819);
 		SET Environment.Variables.BANK_TYPE = cRecord;
@@ -13,6 +15,7 @@ CREATE COMPUTE MODULE iso2xml_Compute
 		
 		DECLARE nowTime CHARACTER CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMdd-HHmmssSSSSSS');
 		SET OutputLocalEnvironment.Wildcard.WildcardMatch = nowTime;
+		
 		
 		RETURN TRUE;
 	END;
