@@ -28,7 +28,11 @@
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="487,159" computeExpression="esql://routine/#iso2xml_Compute1.Main">
         <translation xmi:type="utility:ConstantString" string="Compute1"/>
       </nodes>
+<<<<<<< HEAD
       <nodes xmi:type="ComIbmWSRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="603,157" URLSpecifier="http://161.202.178.194:37911">
+=======
+      <nodes xmi:type="ComIbmWSRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="736,284" URLSpecifier="http://161.202.178.194:37911">
+>>>>>>> parent of 78216eb... Add Log4j
         <translation xmi:type="utility:ConstantString" string="HTTP Request"/>
       </nodes>
       <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="734,150" outputDirectory="/tmp/file_out" outputFilename="iso8583_reply_*.txt">
