@@ -1,0 +1,37 @@
+
+
+CREATE COMPUTE MODULE iso2xml_Compute2
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE rc BOOLEAN;
+		DECLARE elapsed INTERVAL;
+		Declare RequestTime GMTTIMESTAMP;
+		Declare pattern CHARACTER 'yyyyMMdd_HHmmss_SSSSSS';
+		CALL initLog4j('/var/mqsi/saferpaymentlog.xml') INTO rc;
+
+
+		
+		set RequestTime = CAST ( Environment.Variables.RequestTime as TIMESTAMP FORMAT pattern);
+		CALL log4j('TIMESTAMP', 'INFO', 'RQ: '|| CAST(RequestTime AS CHARACTER) || ' Cur:' || CAST (CURRENT_TIMESTAMP AS CHARACTER) )INTO rc;
+		CALL log4j('TIMESTAMP2', 'INFO', 'RQ: '|| Environment.Variables.RequestTime || ' Cur:' || CAST (CURRENT_TIMESTAMP AS CHARACTER) )INTO rc;
+		
+		SET elapsed = (CURRENT_TIMESTAMP - RequestTime) SECOND;
+		CALL log4j('ISO', 'INFO', CAST(CAST(elapsed AS DECIMAL) AS CHARACTER) || ' MILLISECOND MessageID:' || Environment.Variables.MESSAGE_ID) INTO rc;
+		 
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

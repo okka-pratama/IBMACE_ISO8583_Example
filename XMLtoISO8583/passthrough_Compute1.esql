@@ -1,0 +1,28 @@
+
+
+CREATE COMPUTE MODULE passthrough_Compute1
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE rc BOOLEAN;
+		DECLARE elapsed INTERVAL;
+		SET elapsed = (CURRENT_TIMESTAMP - Environment.variables.RequestTime) SECOND * 1000;
+		CALL initLog4j('/var/mqsi/saferpaymentlog.xml') INTO rc;
+		CALL log4j('ELAPSED', 'INFO', CAST(CAST(elapsed AS DECIMAL) AS CHARACTER) || ' MILLISECOND MessageID:' || InputRoot.XMLNSC.IRIS.SystemTime) INTO rc;
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
