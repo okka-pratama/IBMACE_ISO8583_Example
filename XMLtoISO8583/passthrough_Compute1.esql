@@ -5,9 +5,9 @@ CREATE COMPUTE MODULE passthrough_Compute1
 	BEGIN
 		DECLARE rc BOOLEAN;
 		DECLARE elapsed INTERVAL;
-		SET elapsed = (CURRENT_TIMESTAMP - Environment.variables.RequestTime) SECOND * 1000;
+		SET elapsed = (CURRENT_TIMESTAMP - Environment.variables.RequestTime) SECOND;
 		CALL initLog4j('/var/mqsi/saferpaymentlog.xml') INTO rc;
-		CALL log4j('ELAPSED', 'INFO', CAST(CAST(elapsed AS DECIMAL) AS CHARACTER) || ' MILLISECOND MessageID:' || InputRoot.XMLNSC.IRIS.SystemTime) INTO rc;
+		CALL log4j('ELAPSED', 'INFO', CAST(CAST(elapsed *1000 AS DECIMAL) AS CHARACTER) || ' ms|MessageID:' || InputRoot.XMLNSC.IRIS.MessageId) INTO rc;
 
 		RETURN TRUE;
 	END;

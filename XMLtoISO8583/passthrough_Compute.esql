@@ -5,7 +5,9 @@ CREATE COMPUTE MODULE passthrough_Compute
 	BEGIN
 		SET OutputRoot = InputRoot;
 		DECLARE nowTime CHARACTER CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMdd-HHmmssSSSSSS');
+		
 		SET OutputLocalEnvironment.Wildcard.WildcardMatch = nowTime;
+		SET Environment.variables.RequestTime = InputRoot.Properties.CreationTime;
 		RETURN TRUE;
 	END;
 END MODULE;
