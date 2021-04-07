@@ -1,0 +1,46 @@
+
+
+CREATE COMPUTE MODULE passthrough_get_cc_details
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot = InputRoot;
+		DECLARE MyRef REFERENCE TO InputRoot.XMLNSC.IRIS.CREDIT_CARD_NO;
+		DECLARE rc BOOLEAN;
+		
+		DECLARE CARD_CATEGORY CHARACTER;
+		
+--		SET Environment.Variables.CARD_CATEGORY = PASSTHRU('SELECT D_CARD.CARD_CATEGORY
+--					FROM D_CARD WHERE D_CARD.CREDIT_CARD_NO =?' TO Database.POC_SP_DB VALUES (InputRoot.XMLNSC.IRIS.CREDIT_CARD_NO));
+		
+		SET Environment.variables.CARD_CATEGORY.Row[] = PASSTHRU('SELECT CARD_CATEGORY, DAILY_POS_LIMIT FROM POC_SP.dbo.D_CARD WHERE CREDIT_CARD_NO =9314562341177352' TO Database.POC_SP_DB);
+		CALL initLog4j('/var/mqsi/saferpaymentlog.xml') INTO rc;
+		CALL log4j_1_1('FILE_DEFAULT', 'FILE_DEFAULT', 'Info', 'CARD_CATEGORY'|| CAST(Environment.Variables.CARD_CATEGORY.row.Column0 AS CHARACTER)) INTO rc;
+
+--		DECLARE DBSchema CHARACTER 'MYSCHEMA';				
+--		DECLARE DBTable  CHARACTER 'EMPLOYEES';
+--		INSERT INTO Database.{DBSchema}.{DBTable} (PKEY, FIRSTNAME, LASTNAME, COUNTRY)
+--					VALUES( MyRef.PrimaryKey, MyRef.FirstName, MyRef.LastName, MyRef.Country );
+--		IF (SQLCODE = 0) THEN
+--            SET OutputRoot.JSON.Data.Result = 'A row was inserted into the database successfully.';
+--        ELSE
+--            SET OutputRoot.JSON.Data.Result =  
+--            	'The insert failed. The database SQLSTATE was ' || CAST(SQLSTATE AS CHAR) || 
+--            	' and the SQLCODE was ' || CAST(SQLCODE AS CHAR);            	
+--        END IF;							
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

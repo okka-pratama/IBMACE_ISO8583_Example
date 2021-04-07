@@ -21,6 +21,8 @@
     <xsd:element name="CARD_LIMIT" type="xsd:string"></xsd:element>
     <xsd:element name="ECI" type="xsd:string"></xsd:element>
 
+    <xsd:element name="CARD_CATEGORY" type="xsd:string"></xsd:element>
+    <xsd:element name="DAILY_POS_LIMIT" type="xsd:double"></xsd:element>
 
     <xsd:element name="IRIS">
 	    
@@ -40,6 +42,8 @@
 	    		<xsd:element ref="MTID" />
 	    		<xsd:element ref="CARD_LIMIT" />
 	    		<xsd:element ref="ECI" />
+	    		<xsd:element ref="DAILY_POS_LIMIT" />
+	    		<xsd:element ref="CARD_CATEGORY" />
 	    	</xsd:sequence>
 	    	<xsd:attribute name="Version" type="xsd:string"/>
 	    	<xsd:attribute name="Message" type="xsd:string"/>
