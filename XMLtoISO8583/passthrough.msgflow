@@ -41,7 +41,7 @@
     </composition>
     <propertyOrganizer/>
     <stickyBoard>
-      <stickyNote location="623,83">
+      <stickyNote location="314,273">
         <body xmi:type="utility:ConstantString" string="Add log,  take and forward back the response"/>
       </stickyNote>
       <stickyNote location="755,199">
