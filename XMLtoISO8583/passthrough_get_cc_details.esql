@@ -16,8 +16,8 @@ CREATE COMPUTE MODULE passthrough_get_cc_details
 		SET ccNo = InputRoot.XMLNSC.IRIS.CREDIT_CARD_NO;
 		SET dbQuery = 'SELECT CARD_CATEGORY, DAILY_POS_LIMIT FROM POC_SP.dbo.D_CARD WHERE CREDIT_CARD_NO = ' || ccNo;
 		SET dbQueryResult = PASSTHRU(dbQuery TO Database.POC_SP_DB);
-		CALL initLog4j('/var/mqsi/saferpaymentlog.xml') INTO rc;
-		CALL log4j('INFO', 'INFO', 'CARD_CATEGORY: ' || CAST(dbQueryResult.CARD_CATEGORY AS CHARACTER) || ' DAILY_POS_LIMIT: ' || CAST(dbQueryResult.DAILY_POS_LIMIT AS CHARACTER)) INTO rc;
+--		CALL initLog4j('/var/mqsi/saferpaymentlog.xml') INTO rc;
+--		CALL log4j('INFO', 'INFO', 'CARD_CATEGORY: ' || CAST(dbQueryResult.CARD_CATEGORY AS CHARACTER) || ' DAILY_POS_LIMIT: ' || CAST(dbQueryResult.DAILY_POS_LIMIT AS CHARACTER)) INTO rc;
 		
 		SET OutputRoot.XMLNSC.IRIS.CARD_CATEGORY = dbQueryResult.CARD_CATEGORY;
 		SET OutputRoot.XMLNSC.IRIS.DAILY_POS_LIMIT = dbQueryResult.DAILY_POS_LIMIT;
