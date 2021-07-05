@@ -1,0 +1,13 @@
+
+
+CREATE COMPUTE MODULE B24toXML_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE nowTime CHARACTER CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMdd-HHmmssSSSSSS');
+		SET OutputLocalEnvironment.Wildcard.WildcardMatch = nowTime;
+		
+		SET OutputRoot = InputRoot;
+		RETURN TRUE;
+	END;
+END MODULE;
