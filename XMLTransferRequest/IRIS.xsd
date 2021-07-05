@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="IRIS" type="IRISType"/>
+  <xsd:element name="ToAccount" type="xsd:string"/>
+  <xsd:element name="TransactionType" type="xsd:string"/>
+  <xsd:element name="FromAccount" type="xsd:string"/>
+  <xsd:element name="MTID" type="xsd:string"/>
+  <xsd:element name="Amount" type="xsd:string"/>
+  <xsd:element name="SPRequirement" type="xsd:string"/>
+  <xsd:element name="Timestamp" type="xsd:string"/>
+  <xsd:element name="reffNum" type="xsd:string"/>
+  <xsd:complexType name="IRISType">
+    <xsd:sequence>
+      <xsd:element ref="Timestamp"/>
+      <xsd:element ref="reffNum"/>
+      <xsd:element ref="FromAccount"/>
+      <xsd:element ref="ToAccount"/>
+      <xsd:element ref="Amount"/>
+      <xsd:element ref="TransactionType"/>
+      <xsd:element ref="SPRequirement"/>
+      <xsd:element ref="MTID"/>
+    </xsd:sequence>
+    <xsd:attribute name="Message" type="xsd:string"/>
+    <xsd:attribute name="Version" type="xsd:string"/>
+    <xsd:attribute name="MessageTypeId" type="xsd:string"/>
+    <xsd:attribute name="MessageId" type="xsd:string"/>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
+    <input path="/xml-transfer.xsd"/>
+    <output path="/IRIS.xsd"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="in" uri="http://schemas.xmlsoap.org/soap/envelope/"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="XMLTransfer_JMtoSP_Mapping">
+        <input namespace="http://schemas.xmlsoap.org/soap/envelope/" path="mb:msg(Envelope,assembly,XMLNSC,Properties)" var="MessageAssembly"/>
+        <output path="mb:msg(IRIS,assembly,XMLNSC,Properties)" var="MessageAssembly1"/>
+        <move>
+            <input path="$MessageAssembly/Envelope/Body/request/content/Timestamp"/>
+            <output path="$MessageAssembly1/IRIS/Timestamp"/>
+        </move>
+        <move>
+            <input path="$MessageAssembly/Envelope/Body/request/content/FromAccount"/>
+            <output path="$MessageAssembly1/IRIS/FromAccount"/>
+        </move>
+        <move>
+            <input path="$MessageAssembly/Envelope/Body/request/content/ToAccount"/>
+            <output path="$MessageAssembly1/IRIS/ToAccount"/>
+        </move>
+        <move>
+            <input path="$MessageAssembly/Envelope/Body/request/content/Amount"/>
+            <output path="$MessageAssembly1/IRIS/Amount"/>
+        </move>
+        <move>
+            <input path="$MessageAssembly/Envelope/Body/request/content/TransactionType"/>
+            <output path="$MessageAssembly1/IRIS/TransactionType"/>
+        </move>
+        <move>
+            <input path="$MessageAssembly/Envelope/Body/request/content/SPRequirement"/>
+            <output path="$MessageAssembly1/IRIS/SPRequirement"/>
+        </move>
+        <move>
+            <input path="$MessageAssembly/Envelope/Body/request/content/MTID"/>
+            <output path="$MessageAssembly1/IRIS/MTID"/>
+        </move>
+        <move>
+            <input path="$MessageAssembly/Envelope/Body/request/content/reffNum"/>
+            <output path="$MessageAssembly1/IRIS/reffNum"/>
+        </move>
+        <move>
+            <input path="$MessageAssembly/Envelope/Body/request/content/MTID"/>
+            <output path="$MessageAssembly1/IRIS/@MessageTypeId"/>
+        </move>
+        <assign value="1">
+            <output path="$MessageAssembly1/IRIS/@Version"/>
+        </assign>
+        <assign value="ModelRequest">
+            <output path="$MessageAssembly1/IRIS/@Message"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>
