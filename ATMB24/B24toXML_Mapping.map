@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
+    <input path="/ATMB24.xsd"/>
+    <output path="/IRIS_B24.xsd"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="out" uri="IRIS_B24"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="B24toXML_Mapping">
+        <input path="mb:msg(ATMB24,assembly,DFDL,Properties)" var="ComIbmMessageAssembly_ATMB24"/>
+        <output path="mb:msg(IRIS,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_IRIS"/>
+        <move>
+            <input path="$ComIbmMessageAssembly_ATMB24/Properties"/>
+            <output path="$ComIbmMessageAssembly_IRIS/Properties"/>
+        </move>
+        <expression>
+            <input path="$ComIbmMessageAssembly_ATMB24/ATMB24/record/field6" var="field6"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/PAN"/>
+            <code lang="xpath">fn:substring($field6,2,16)</code>
+        </expression>
+        <convert>
+            <input path="$ComIbmMessageAssembly_ATMB24/ATMB24/record/field10"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/Amount"/>
+        </convert>
+        <move>
+            <input path="$ComIbmMessageAssembly_ATMB24/ATMB24/record/field15"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/MTID"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ATMB24/ATMB24/record/field16"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/SPRequirement"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ATMB24/ATMB24/record/field17"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/Timestamp"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ATMB24/ATMB24/record/field18"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/reffNum"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ATMB24/ATMB24/record/field19"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/ResponseCode"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ATMB24/ATMB24/record/field20"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/POSEntryMode"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ATMB24/ATMB24/record/field21"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/TransactionType"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ATMB24/ATMB24/record/field15"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/@MessageTypeId"/>
+        </move>
+        <assign value="1">
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/@Version"/>
+        </assign>
+        <assign value="ModelRequest">
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/@Message"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>

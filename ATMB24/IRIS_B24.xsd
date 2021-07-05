@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="IRIS">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="PAN" type="xsd:string"/>
+        <xsd:element name="Amount" type="xsd:int"/>
+        <xsd:element name="MTID" type="xsd:string"/>
+        <xsd:element name="SPRequirement" type="xsd:string"/>
+        <xsd:element name="Timestamp" type="xsd:string"/>
+        <xsd:element name="reffNum" type="xsd:string"/>
+        <xsd:element name="ResponseCode" type="xsd:string"/>
+        <xsd:element name="POSEntryMode" type="xsd:string"/>
+        <xsd:element name="TransactionType" type="xsd:string"/>
+      </xsd:sequence>
+      <xsd:attribute name="Message" type="xsd:string"/>
+      <xsd:attribute name="Version" type="xsd:string"/>
+      <xsd:attribute name="MessageTypeId" type="xsd:string"/>
+      <xsd:attribute name="MessageId" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</xsd:schema>
