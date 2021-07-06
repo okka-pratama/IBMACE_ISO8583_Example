@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dpss0="bons">
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
   <xsd:element name="Header">
     <xsd:complexType/>
   </xsd:element>
@@ -12,12 +12,7 @@
   </xsd:complexType>
   <xsd:complexType name="BodyType">
     <xsd:sequence>
-
-    	<xsd:element name="core:transactionResponse" type="xsd:string"></xsd:element>
+      <xsd:any namespace="##other" processContents="lax"/>
     </xsd:sequence>
-  </xsd:complexType>
-
-  <xsd:complexType name="core:transactionResponse">
-  	<xsd:attribute name="xmlns:bo" type="xsd:string"></xsd:attribute>
   </xsd:complexType>
 </xsd:schema>
