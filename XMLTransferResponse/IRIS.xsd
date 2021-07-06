@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="IRIS" type="IRISType"/>
+  <xsd:element name="FromAccount" type="xsd:string"/>
+  <xsd:element name="SP_Intercept" type="xsd:string"/>
+  <xsd:element name="Timestamp" type="xsd:string"/>
+  <xsd:element name="SP_Block" type="xsd:string"/>
+  <xsd:element name="reffNum" type="xsd:string"/>
+  <xsd:complexType name="IRISType">
+    <xsd:sequence>
+      <xsd:element ref="SP_Intercept"/>
+      <xsd:element ref="SP_Block"/>
+      <xsd:element ref="FromAccount"/>
+      <xsd:element ref="Timestamp"/>
+      <xsd:element ref="reffNum"/>
+    </xsd:sequence>
+    <xsd:attribute name="Mandator_0" type="xsd:string"/>
+    <xsd:attribute name="Message" type="xsd:string"/>
+    <xsd:attribute name="IrisInstance" type="xsd:string"/>
+    <xsd:attribute name="Merging" type="xsd:string"/>
+    <xsd:attribute name="Error" type="xsd:string"/>
+    <xsd:attribute name="Latency" type="xsd:string"/>
+    <xsd:attribute name="Revision_0" type="xsd:string"/>
+    <xsd:attribute name="UniqueRecordId" type="xsd:string"/>
+    <xsd:attribute name="Version" type="xsd:string"/>
+    <xsd:attribute name="InstanceStatus" type="xsd:string"/>
+    <xsd:attribute name="MessageTypeId" type="xsd:string"/>
+    <xsd:attribute name="ErrorCode" type="xsd:string"/>
+    <xsd:attribute name="MessageId" type="xsd:string"/>
+    <xsd:attribute name="SystemTime" type="xsd:string"/>
+  </xsd:complexType>
+</xsd:schema>
