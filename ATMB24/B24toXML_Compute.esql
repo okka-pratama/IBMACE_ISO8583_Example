@@ -7,7 +7,8 @@ CREATE COMPUTE MODULE B24toXML_Compute
 		DECLARE nowTime CHARACTER CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMdd-HHmmssSSSSSS');
 		SET OutputLocalEnvironment.Wildcard.WildcardMatch = nowTime;
 		
-		SET Environment.Variables.MESSAGE_ID = OutputLocalEnvironment.Sequence.Number;
+		SET Environment.Variables.MESSAGE_ID = b24Counter;
+		SET b24Counter = b24Counter + 1;
 		
 		SET OutputRoot = InputRoot;
 		RETURN TRUE;

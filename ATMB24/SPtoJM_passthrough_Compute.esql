@@ -1,9 +1,0 @@
-
-
-CREATE COMPUTE MODULE SPtoJM_passthrough_Compute
-	CREATE FUNCTION Main() RETURNS BOOLEAN
-	BEGIN
-		SET OutputRoot = InputRoot;
-		RETURN TRUE;
-	END;
-END MODULE;
