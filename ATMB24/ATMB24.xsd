@@ -36,10 +36,11 @@
                             <xsd:element ibmDfdlExtn:sampleValue="value19" minOccurs="0" name="field19" type="xsd:string"/>
                             <xsd:element ibmDfdlExtn:sampleValue="value20" minOccurs="0" name="field20" type="xsd:string"/>
                             <xsd:element ibmDfdlExtn:sampleValue="value21" minOccurs="0" name="field21" type="xsd:string"/>
+                                                    <xsd:element ibmDfdlExtn:sampleValue="value22" minOccurs="0" name="field22" type="xsd:string"/>
                         </xsd:sequence>
 					</xsd:complexType>
 				</xsd:element>				
-			</xsd:sequence>
+                			            </xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
 
