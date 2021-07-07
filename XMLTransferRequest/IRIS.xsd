@@ -8,6 +8,8 @@
   <xsd:element name="SPRequirement" type="xsd:string"/>
   <xsd:element name="Timestamp" type="xsd:string"/>
   <xsd:element name="reffNum" type="xsd:string"/>
+  <xsd:element name="SP_Intercept" type="xsd:string"/>
+  <xsd:element name="SP_Block" type="xsd:string"/>
   <xsd:complexType name="IRISType">
     <xsd:sequence>
       <xsd:element ref="Timestamp"/>
@@ -18,6 +20,8 @@
       <xsd:element ref="TransactionType"/>
       <xsd:element ref="SPRequirement"/>
       <xsd:element ref="MTID"/>
+      <xsd:element ref="SP_Intercept"/>
+      <xsd:element ref="SP_Block"/>
     </xsd:sequence>
     <xsd:attribute name="Message" type="xsd:string"/>
     <xsd:attribute name="Version" type="xsd:string"/>

@@ -36,10 +36,7 @@
             <input path="$MessageAssembly/Envelope/Body/request/content/MTID"/>
             <output path="$MessageAssembly1/IRIS/MTID"/>
         </move>
-        <move>
-            <input path="$MessageAssembly/Envelope/Body/request/content/reffNum"/>
-            <output path="$MessageAssembly1/IRIS/reffNum"/>
-        </move>
+        <task type="todo"/>
         <move>
             <input path="$MessageAssembly/Envelope/Body/request/content/MTID"/>
             <output path="$MessageAssembly1/IRIS/@MessageTypeId"/>
@@ -50,5 +47,9 @@
         <assign value="ModelRequest">
             <output path="$MessageAssembly1/IRIS/@Message"/>
         </assign>
+        <move>
+            <input path="$MessageAssembly/Envelope/Body/request/content/reffNum"/>
+            <output path="$MessageAssembly1/IRIS/reffNum"/>
+        </move>
     </mappingDeclaration>
 </mappingRoot>
