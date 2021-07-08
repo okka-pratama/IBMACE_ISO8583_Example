@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
     <input path="/IRIS.xsd"/>
-    <output path="/xml-transfer.xsd"/>
+    <output path="/transactionResponse.xsd"/>
     <namespaces>
         <namespace kind="supplement" prefix="out" uri="http://schemas.xmlsoap.org/soap/envelope/"/>
     </namespaces>
     <generation engine="xquery"/>
     <mappingDeclaration name="XMLTransfer_Request_back_to_client">
         <input path="mb:msg(IRIS,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_IRIS"/>
-        <output namespace="http://schemas.xmlsoap.org/soap/envelope/" path="mb:msg(Envelope,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_Envelope"/>
+        <output namespace="http://service.bni.co.id/core" path="mb:msg(transactionResponse,assembly,XMLNSC,Properties)" var="MessageAssembly1"/>
         <task type="todo"/>
         <task type="todo"/>
-        <move>
-            <input path="$ComIbmMessageAssembly_IRIS/IRIS/SP_Block"/>
-            <output path="$ComIbmMessageAssembly_Envelope/Envelope/Body/response/content/SP_Block"/>
-        </move>
+        <assign value="900014">
+            <output path="$MessageAssembly1/transactionResponse/response/header/coreJournal"/>
+        </assign>
+        <assign value="90614655079061465507">
+            <output path="$MessageAssembly1/transactionResponse/response/content/message"/>
+        </assign>
         <move>
             <input path="$ComIbmMessageAssembly_IRIS/IRIS/SP_Intercept"/>
-            <output path="$ComIbmMessageAssembly_Envelope/Envelope/Body/response/content/SP_Intercept"/>
+            <output path="$MessageAssembly1/transactionResponse/response/content/SP_Intercept"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_IRIS/IRIS/SP_Block"/>
+            <output path="$MessageAssembly1/transactionResponse/response/content/SP_Block"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_IRIS/IRIS/FromAccount"/>
-            <output path="$ComIbmMessageAssembly_Envelope/Envelope/Body/response/content/FromAccount"/>
+            <output path="$MessageAssembly1/transactionResponse/response/content/FromAccount"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_IRIS/IRIS/Timestamp"/>
-            <output path="$ComIbmMessageAssembly_Envelope/Envelope/Body/response/content/Timestamp"/>
+            <output path="$MessageAssembly1/transactionResponse/response/content/Timestamp"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_IRIS/IRIS/reffNum"/>
-            <output path="$ComIbmMessageAssembly_Envelope/Envelope/Body/response/content/reffNum"/>
+            <output path="$MessageAssembly1/transactionResponse/response/content/reffNum"/>
         </move>
-        <assign value="900014">
-            <output path="$ComIbmMessageAssembly_Envelope/Envelope/Body/response/header/coreJournal"/>
-        </assign>
     </mappingDeclaration>
 </mappingRoot>

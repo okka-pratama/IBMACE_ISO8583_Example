@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
+<xs:schema xmlns:core="http://service.bni.co.id/core" xmlns:bo="http://service.bni.co.id/core/bo" xmlns:ns0="bons" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://service.bni.co.id/core" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="response.xsd" />
+  <xs:element name="transactionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

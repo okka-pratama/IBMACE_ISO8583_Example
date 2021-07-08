@@ -3,11 +3,12 @@
 CREATE COMPUTE MODULE XMLTransfer_Request_change_namespace
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		-- CALL CopyMessageHeaders();
-		-- CALL CopyEntireMessage();
-		DECLARE space1 NAMESPACE 'soapenv';
+		CALL CopyMessageHeaders();
+		CALL CopyEntireMessage();
+		-- DECLARE space1 NAMESPACE 'soapenv';
 		
-		SET OutputRoot.(XMLNSC.SingleNamespaceDecl)xmlns:out = space1;
+		-- SET OutputRoot.(XMLNSC.SingleNamespaceDecl)xmlns:out = space1;
+--		SET LocalEnvironment.SOAP.Envelope = OutputRoot.XMLNSC.Envelope;
 		RETURN TRUE;
 	END;
 
