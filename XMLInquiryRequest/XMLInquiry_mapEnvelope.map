@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
+    <inlinedXMLSchema><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="MESSAGE_ID" type="xsd:string"/>
+</xsd:schema>]]></inlinedXMLSchema>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var1"/>
+    <input path="/xmlInquiry/envelope.xsd" var="var2"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var3"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var4"/>
+    <output path="/xmlInquiry/xmlInquiry/request2.xsd" var="var5"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="in" uri="http://schemas.xmlsoap.org/soap/envelope/"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="XMLInquiry_mapEnvelope">
+        <input path="$var1/mb:env(Environment)" var="Environment">
+            <cast castType="userDefined" path="$Environment/Variables/any" qualifier="MESSAGE_ID" ref="var" var="any"/>
+        </input>
+        <input namespace="http://schemas.xmlsoap.org/soap/envelope/" path="$var2/mb:msg(Envelope,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_Envelope"/>
+        <output path="$var4/mb:env(Environment)" var="Environment1">
+            <cast castType="userDefined" path="$Environment1/Variables/any" qualifier="MESSAGE_ID" ref="var" var="any1"/>
+        </output>
+        <output path="$var5/mb:msg(IRIS,assembly,XMLNSC,Properties)" var="MessageAssembly"/>
+        <passthrough>
+            <input path="$Environment/."/>
+            <output path="$Environment1/."/>
+            <updates/>
+        </passthrough>
+        <move>
+            <input path="$ComIbmMessageAssembly_Envelope/Properties"/>
+            <output path="$MessageAssembly/Properties"/>
+        </move>
+        <move automap="true">
+            <input path="$ComIbmMessageAssembly_Envelope/Envelope/Body/request/content/Timestamp"/>
+            <output path="$MessageAssembly/IRIS/Timestamp"/>
+        </move>
+        <move automap="true">
+            <input path="$ComIbmMessageAssembly_Envelope/Envelope/Body/request/content/reffNum"/>
+            <output path="$MessageAssembly/IRIS/reffNum"/>
+        </move>
+        <move automap="true">
+            <input path="$ComIbmMessageAssembly_Envelope/Envelope/Body/request/content/AccountNum"/>
+            <output path="$MessageAssembly/IRIS/AccountNum"/>
+        </move>
+        <move automap="true">
+            <input path="$ComIbmMessageAssembly_Envelope/Envelope/Body/request/content/Amount"/>
+            <output path="$MessageAssembly/IRIS/Amount"/>
+        </move>
+        <move automap="true">
+            <input path="$ComIbmMessageAssembly_Envelope/Envelope/Body/request/content/TransactionType"/>
+            <output path="$MessageAssembly/IRIS/TransactionType"/>
+        </move>
+        <move automap="true">
+            <input path="$ComIbmMessageAssembly_Envelope/Envelope/Body/request/content/SPRequirement"/>
+            <output path="$MessageAssembly/IRIS/SPRequirement"/>
+        </move>
+        <move automap="true">
+            <input path="$ComIbmMessageAssembly_Envelope/Envelope/Body/request/content/MTID"/>
+            <output path="$MessageAssembly/IRIS/MTID"/>
+        </move>
+        <assign value="ModelRequest">
+            <output path="$MessageAssembly/IRIS/@Message"/>
+        </assign>
+        <assign value="1">
+            <output path="$MessageAssembly/IRIS/@Version"/>
+        </assign>
+        <move>
+            <input path="$ComIbmMessageAssembly_Envelope/Envelope/Body/request/content/MTID"/>
+            <output path="$MessageAssembly/IRIS/@MessageTypeId"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/MESSAGE_ID"/>
+            <output path="$MessageAssembly/IRIS/@MessageId"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>
