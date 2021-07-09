@@ -20,9 +20,25 @@
     <xsd:element name="MTID" type="xsd:string"></xsd:element>
     <xsd:element name="CARD_LIMIT" type="xsd:string"></xsd:element>
     <xsd:element name="ECI" type="xsd:string"></xsd:element>
-
     <xsd:element name="CARD_CATEGORY" type="xsd:string"></xsd:element>
     <xsd:element name="DAILY_POS_LIMIT" type="xsd:double"></xsd:element>
+    
+    <xsd:element name="PAN" type="xsd:string"></xsd:element>
+    <xsd:element name="TransactionType" type="xsd:int"></xsd:element>
+    <xsd:element name="Amount" type="xsd:float"></xsd:element>
+    <xsd:element name="Timestamp" type="xsd:string"></xsd:element>
+    <xsd:element name="TimeStamp" type="xsd:string"></xsd:element>
+    <xsd:element name="reffNum" type="xsd:string"></xsd:element>
+    <xsd:element name="SPRequirement" type="xsd:string"></xsd:element>
+    <xsd:element name="TerminalID" type="xsd:string">
+    </xsd:element>
+    <xsd:element name="MerchantNumber" type="xsd:string">
+    </xsd:element>
+
+    
+    
+    <xsd:element name="SP_Intercept" type="xsd:string"></xsd:element>
+    <xsd:element name="SP_Block" type="xsd:string"></xsd:element>
 
     <xsd:element name="IRIS">
 	    
@@ -44,6 +60,19 @@
 	    		<xsd:element ref="ECI" />
 	    		<xsd:element ref="DAILY_POS_LIMIT" />
 	    		<xsd:element ref="CARD_CATEGORY" />
+	    		
+	    		<xsd:element ref="PAN" />
+	    		<xsd:element ref="TransactionType" />
+	    		<xsd:element ref="Amount" />
+	    		<xsd:element ref="Timestamp" />
+	    		<xsd:element ref="TimeStamp" />
+	    		<xsd:element ref="reffNum" />
+	    		<xsd:element ref="SPRequirement" />
+	    		<xsd:element ref="TerminalID" />
+	    		<xsd:element ref="MerchantNumber" />
+	    		
+	    		<xsd:element ref="SP_Intercept" />
+	    		<xsd:element ref="SP_Block" />
 	    	</xsd:sequence>
 	    	<xsd:attribute name="Version" type="xsd:string"/>
 	    	<xsd:attribute name="Message" type="xsd:string"/>

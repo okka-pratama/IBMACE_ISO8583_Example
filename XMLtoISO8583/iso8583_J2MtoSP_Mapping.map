@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
+    <input path="mbsharedlib://ISO8583/1987/ISO8583_1987_Unpacked.xsd"/>
+    <output path="/IRIS.xsd"/>
+    <namespaces>
+        <namespace kind="extension" prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="iso8583_J2MtoSP_Mapping">
+        <input path="mb:msg(ISO8583_1987_Unpacked,assembly,DFDL,Properties)" var="ComIbmMessageAssembly_ISO8583_1987_Unpacked"/>
+        <output path="mb:msg(IRIS,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_IRIS"/>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/Properties"/>
+            <output path="$ComIbmMessageAssembly_IRIS/Properties"/>
+        </move>
+        <assign value="ModelRequest">
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/@Message"/>
+        </assign>
+        <assign value="10000">
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/@MessageID"/>
+        </assign>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/ResponseCode_039"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/@MessageTypeId"/>
+        </move>
+        <assign value="1">
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/@Version"/>
+        </assign>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/PrimaryAccountNumber_002"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/PAN"/>
+        </move>
+        <convert>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/ProcessingCode_003"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/TransactionType"/>
+        </convert>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/AmountTransaction_004"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/Amount"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/PointOfServiceEntryMode_022"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/POSEntryMode"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/RetrievalReferenceNumber_037"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/reffNum"/>
+        </move>
+        <expression>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/AuthorizationIdentificationResponse_038" var="AuthorizationIdentificationResponse_038"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/SPRequirement"/>
+            <code lang="xpath">fn:substring($AuthorizationIdentificationResponse_038 ,2,5)</code>
+        </expression>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/CardAcceptorTerminalIdentification_041" var="CardAcceptorTerminalIdentification_041"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/TerminalID"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/CardAcceptorIdentificationCode_042" var="CardAcceptorIdentificationCode_042"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/MerchantNumber"/>
+        </move>
+        <expression>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/TimeLocalTransaction_012" var="TimeLocalTransaction_012"/>
+            <input path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/DateLocalTransaction_013" var="DateLocalTransaction_013"/>
+            <output path="$ComIbmMessageAssembly_IRIS/IRIS/TimeStamp"/>
+            <code lang="xpath">fn:concat(
+	fn:substring($DateLocalTransaction_013,3,2),
+	'.',
+	fn:substring($DateLocalTransaction_013,1,2),
+	'.',
+	'2021',
+	' ',
+	$TimeLocalTransaction_012
+)</code>
+        </expression>
+    </mappingDeclaration>
+</mappingRoot>
