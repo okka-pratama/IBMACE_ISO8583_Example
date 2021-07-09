@@ -3,6 +3,7 @@
     <output path="/transactionResponse.xsd"/>
     <namespaces>
         <namespace kind="supplement" prefix="out" uri="http://schemas.xmlsoap.org/soap/envelope/"/>
+        <namespace kind="supplement" prefix="out2" uri="http://service.bni.co.id/core"/>
     </namespaces>
     <generation engine="xquery"/>
     <mappingDeclaration name="XMLTransfer_Request_back_to_client">
@@ -25,16 +26,16 @@
             <output path="$MessageAssembly1/transactionResponse/response/content/SP_Block"/>
         </move>
         <move>
-            <input path="$ComIbmMessageAssembly_IRIS/IRIS/FromAccount"/>
-            <output path="$MessageAssembly1/transactionResponse/response/content/FromAccount"/>
-        </move>
-        <move>
             <input path="$ComIbmMessageAssembly_IRIS/IRIS/Timestamp"/>
             <output path="$MessageAssembly1/transactionResponse/response/content/Timestamp"/>
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_IRIS/IRIS/reffNum"/>
             <output path="$MessageAssembly1/transactionResponse/response/content/reffNum"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_IRIS/IRIS/AccountNum"/>
+            <output path="$MessageAssembly1/transactionResponse/response/content/FromAccount"/>
         </move>
     </mappingDeclaration>
 </mappingRoot>
