@@ -1,0 +1,16 @@
+
+
+CREATE COMPUTE MODULE XMLInquiry_Generate
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nowTime CHARACTER CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMdd-HHmmssSSSSSS');
+		SET OutputLocalEnvironment.Wildcard.WildcardMatch = nowTime;
+		
+		SET xmlInquiryCounter = xmlInquiryCounter + RAND(100) * 100;
+		SET Environment.Variables.MESSAGE_ID = xmlInquiryCounter;
+		
+		SET OutputRoot = InputRoot;
+		RETURN TRUE;
+	END;
+
+END MODULE;

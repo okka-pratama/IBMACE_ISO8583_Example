@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
-    <input path="/xml-transfer.xsd"/>
-    <output path="/IRIS.xsd"/>
+    <inlinedXMLSchema><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="MESSAGE_ID" type="xsd:string"/>
+</xsd:schema>]]></inlinedXMLSchema>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var"/>
+    <input path="/xml-transfer.xsd" var="var1"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var4"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var5"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var2"/>
+    <output path="/IRIS.xsd" var="var3"/>
     <namespaces>
         <namespace kind="supplement" prefix="in" uri="http://schemas.xmlsoap.org/soap/envelope/"/>
     </namespaces>
     <generation engine="xquery"/>
     <mappingDeclaration name="XMLTransfer_JMtoSP_Mapping">
-        <input namespace="http://schemas.xmlsoap.org/soap/envelope/" path="mb:msg(Envelope,assembly,XMLNSC,Properties)" var="MessageAssembly"/>
-        <output path="mb:msg(IRIS,assembly,XMLNSC,Properties)" var="MessageAssembly1"/>
+        <input path="$var/mb:env(Environment)" var="Environment">
+            <cast castType="userDefined" path="$Environment/Variables/any" qualifier="MESSAGE_ID" ref="var4" var="any"/>
+        </input>
+        <input namespace="http://schemas.xmlsoap.org/soap/envelope/" path="$var1/mb:msg(Envelope,assembly,XMLNSC,Properties)" var="MessageAssembly"/>
+        <output path="$var2/mb:env(Environment)" var="Environment1">
+            <cast castType="userDefined" path="$Environment1/Variables/any" qualifier="MESSAGE_ID" ref="var4" var="any1"/>
+        </output>
+        <output path="$var3/mb:msg(IRIS,assembly,XMLNSC,Properties)" var="MessageAssembly1"/>
+        <passthrough>
+            <input path="$Environment/."/>
+            <output path="$Environment1/."/>
+            <updates/>
+        </passthrough>
         <move>
             <input path="$MessageAssembly/Envelope/Body/request/content/Timestamp"/>
             <output path="$MessageAssembly1/IRIS/Timestamp"/>
@@ -50,6 +68,10 @@
         <move>
             <input path="$MessageAssembly/Envelope/Body/request/content/reffNum"/>
             <output path="$MessageAssembly1/IRIS/reffNum"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/MESSAGE_ID"/>
+            <output path="$MessageAssembly1/IRIS/@MessageId"/>
         </move>
     </mappingDeclaration>
 </mappingRoot>

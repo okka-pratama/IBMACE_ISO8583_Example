@@ -1,0 +1,17 @@
+
+
+CREATE COMPUTE MODULE XMLTransfer_Request_generate
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE nowTime CHARACTER CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMdd-HHmmssSSSSSS');
+		SET OutputLocalEnvironment.Wildcard.WildcardMatch = nowTime;
+		
+		SET xmlTransferCounter = xmlTransferCounter + RAND(100) * 100;
+		SET Environment.Variables.MESSAGE_ID = xmlTransferCounter;
+		
+		SET OutputRoot = InputRoot;
+		RETURN TRUE;
+	END;
+	
+END MODULE;

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="IRIS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Timestamp" type="xs:string" />
+        <xs:element name="reffNum" type="xs:string" />
+        <xs:element name="AccountNum" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="FromAccount" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="Amount" type="xs:string"  minOccurs="0" maxOccurs="1"/>
+        <xs:element name="TransactionType" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="SPRequirement" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="MTID" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="EmployeeID" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="SP_Intercept" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="SP_Block" type="xs:string" minOccurs="0" maxOccurs="1" />
+      </xs:sequence>
+      <xs:attribute name="Message" type="xs:string" use="required" />
+      <xs:attribute name="MessageId" type="xs:string" use="required" />
+      <xs:attribute name="MessageTypeId" type="xs:string" use="required" />
+      <xs:attribute name="Version" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

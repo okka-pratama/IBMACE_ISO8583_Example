@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
+    <input path="/xmlInquiry/xmlInquiry/request2.xsd"/>
+    <output path="/xmlInquiry/response.xsd"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="out" uri="http://service.bni.co.id/atmbersama"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="XMLInquiry_mapResponse">
+        <input path="mb:msg(IRIS,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_IRIS"/>
+        <output path="mb:msg(response,assembly,XMLNSC,Properties)" var="MessageAssembly1"/>
+        <move>
+            <input path="$ComIbmMessageAssembly_IRIS/Properties"/>
+            <output path="$MessageAssembly1/Properties"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_IRIS/IRIS/SP_Intercept"/>
+            <output path="$MessageAssembly1/response/content/SP_Intercept"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_IRIS/IRIS/SP_Block"/>
+            <output path="$MessageAssembly1/response/content/SP_Block"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_IRIS/IRIS/AccountNum"/>
+            <output path="$MessageAssembly1/response/content/AccountNum"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_IRIS/IRIS/Timestamp"/>
+            <output path="$MessageAssembly1/response/content/Timestamp"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_IRIS/IRIS/reffNum"/>
+            <output path="$MessageAssembly1/response/content/reffNum"/>
+        </move>
+        <assign value="ATMBERSAMA">
+            <output path="$MessageAssembly1/response/provider"/>
+        </assign>
+        <assign value="NEWMOBILE">
+            <output path="$MessageAssembly1/response/clientId"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>
