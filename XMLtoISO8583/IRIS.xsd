@@ -26,6 +26,7 @@
     <xsd:element name="PAN" type="xsd:string"></xsd:element>
     <xsd:element name="TransactionType" type="xsd:int"></xsd:element>
     <xsd:element name="Amount" type="xsd:float"></xsd:element>
+    <xsd:element name="Timestamp" type="xsd:string"></xsd:element>
     <xsd:element name="TimeStamp" type="xsd:string"></xsd:element>
     <xsd:element name="reffNum" type="xsd:string"></xsd:element>
     <xsd:element name="SPRequirement" type="xsd:string"></xsd:element>
@@ -63,6 +64,7 @@
 	    		<xsd:element ref="PAN" />
 	    		<xsd:element ref="TransactionType" />
 	    		<xsd:element ref="Amount" />
+	    		<xsd:element ref="Timestamp" />
 	    		<xsd:element ref="TimeStamp" />
 	    		<xsd:element ref="reffNum" />
 	    		<xsd:element ref="SPRequirement" />
