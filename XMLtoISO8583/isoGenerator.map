@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
+    <output path="mbsharedlib://ISO8583/1987/ISO8583_1987_Unpacked.xsd"/>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="isoGenerator">
+        <output path="mb:msg(ISO8583_1987_Unpacked,assembly,XMLNSC,Properties)"/>
+        <assign value="{ISO8583}">
+            <output path="Properties/MessageSet"/>
+        </assign>
+        <assign value="{}:ISO8583_1987_Unpacked">
+            <output path="Properties/MessageType"/>
+        </assign>
+        <assign value="1">
+            <output path="ISO8583_1987_Unpacked/MTI_Version"/>
+        </assign>
+        <assign value="2">
+            <output path="ISO8583_1987_Unpacked/MTI_MessageClass"/>
+        </assign>
+        <assign value="0">
+            <output path="ISO8583_1987_Unpacked/MTI_MessageFunction"/>
+        </assign>
+        <assign value="0">
+            <output path="ISO8583_1987_Unpacked/MTI_MessageOrigin"/>
+        </assign>
+        <assign value="0005264222590002564">
+            <output path="ISO8583_1987_Unpacked/PrimaryAccountNumber_002"/>
+        </assign>
+        <assign value="000040">
+            <output path="ISO8583_1987_Unpacked/ProcessingCode_003"/>
+        </assign>
+        <assign value="000006000000">
+            <output path="ISO8583_1987_Unpacked/AmountTransaction_004"/>
+        </assign>
+        <assign value="000000">
+            <output path="ISO8583_1987_Unpacked/SystemsTraceAuditNumber_011"/>
+        </assign>
+        <assign value="09:51:13">
+            <output path="ISO8583_1987_Unpacked/TimeLocalTransaction_012"/>
+        </assign>
+        <assign value="0422">
+            <output path="ISO8583_1987_Unpacked/DateLocalTransaction_013"/>
+        </assign>
+        <assign value="079">
+            <output path="ISO8583_1987_Unpacked/PointOfServiceEntryMode_022"/>
+        </assign>
+        <assign value="000">
+            <output path="ISO8583_1987_Unpacked/NetworkInternationalIdentifier_024"/>
+        </assign>
+        <assign value="00">
+            <output path="ISO8583_1987_Unpacked/PointOfServiceConditionCode_025"/>
+        </assign>
+        <assign value="c69e0dd19012">
+            <output path="ISO8583_1987_Unpacked/RetrievalReferenceNumber_037"/>
+        </assign>
+        <assign value="EBK020">
+            <output path="ISO8583_1987_Unpacked/AuthorizationIdentificationResponse_038"/>
+        </assign>
+        <assign value="95">
+            <output path="ISO8583_1987_Unpacked/ResponseCode_039"/>
+        </assign>
+        <assign value="03145920">
+            <output path="ISO8583_1987_Unpacked/CardAcceptorTerminalIdentification_041"/>
+        </assign>
+        <assign value="000009300029380">
+            <output path="ISO8583_1987_Unpacked/CardAcceptorIdentificationCode_042"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>

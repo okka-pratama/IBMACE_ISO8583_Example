@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
     <inlinedXMLSchema><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <xsd:element name="reffNum" nillable="true" type="xsd:string"/>
     <xsd:element name="TransactionType" nillable="true" type="xsd:string"/>
     <xsd:element name="Timestamp" nillable="true" type="xsd:string"/>
     <xsd:element name="SPRequirement" nillable="true" type="xsd:string"/>
@@ -23,6 +24,7 @@
             <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/any" qualifier="SPRequirement" ref="var2" var="any3"/>
             <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/any" qualifier="Timestamp" ref="var2" var="any4"/>
             <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/any" qualifier="TransactionType" ref="var2" var="any5"/>
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/any" qualifier="reffNum" ref="var2"/>
         </input>
         <output namespace="http://www.ibm.com/iib/msl/json" path="$var1/mb:msg(JSON,assembly,JSON,Properties)" var="ComIbmMessageAssembly_JSON1">
             <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON1/JSON/Data/type('anyType')" qualifier="{http://www.ibm.com/iib/msl/json}JSONObject" ref="var1" var="anyType1"/>
@@ -53,6 +55,10 @@
         </move>
         <move>
             <input path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/TransactionType"/>
+            <output path="$ComIbmMessageAssembly_JSON1/JSON/spath('Data',2)/any"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/reffNum"/>
             <output path="$ComIbmMessageAssembly_JSON1/JSON/spath('Data',2)/any"/>
         </move>
     </mappingDeclaration>
