@@ -89,5 +89,14 @@
             <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/DateLocalTransaction_013"/>
             <code lang="xpath">fn:concat(fn:substring($Timestamp,6,2),fn:substring($Timestamp,9,2))</code>
         </expression>
+        <expression>
+            <input path="$ComIbmMessageAssembly_IRIS/IRIS/POSEntryMode" var="POSEntryMode"/>
+            <output path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/PointOfServiceEntryMode_022"/>
+            <code lang="xpath">fn:substring(
+  fn:concat('000', $POSEntryMode), 
+  fn:string-length($POSEntryMode)+1, 
+  3
+)</code>
+        </expression>
     </mappingDeclaration>
 </mappingRoot>
