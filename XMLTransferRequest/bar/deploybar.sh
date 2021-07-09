@@ -9,3 +9,13 @@
 ~/IBM/ace-11.0.0.11/server/bin/mqsideploy -i saferpayment.ace -p 4414 -e BNI_SERVER8 -a $1
 ~/IBM/ace-11.0.0.11/server/bin/mqsideploy -i saferpayment.ace -p 4414 -e BNI_SERVER9 -a $1
 ~/IBM/ace-11.0.0.11/server/bin/mqsideploy -i saferpayment.ace -p 4414 -e BNI_SERVER10 -a $1
+~/IBM/ace-11.0.0.11/server/bin/mqsideploy -i saferpayment.ace -p 4414 -e BNI_SERVER11 -a $1
+~/IBM/ace-11.0.0.11/server/bin/mqsideploy -i saferpayment.ace -p 4414 -e BNI_SERVER12 -a $1
+~/IBM/ace-11.0.0.11/server/bin/mqsideploy -i saferpayment.ace -p 4414 -e BNI_SERVER13 -a $1
+~/IBM/ace-11.0.0.11/server/bin/mqsideploy -i saferpayment.ace -p 4414 -e BNI_SERVER14 -a $1
+~/IBM/ace-11.0.0.11/server/bin/mqsideploy -i saferpayment.ace -p 4414 -e BNI_SERVER15 -a $1
+~/IBM/ace-11.0.0.11/server/bin/mqsideploy -i saferpayment.ace -p 4414 -e BNI_SERVER16 -a $1
+~/IBM/ace-11.0.0.11/server/bin/mqsideploy -i saferpayment.ace -p 4414 -e BNI_SERVER17 -a $1
+~/IBM/ace-11.0.0.11/server/bin/mqsideploy -i saferpayment.ace -p 4414 -e BNI_SERVER18 -a $1
+~/IBM/ace-11.0.0.11/server/bin/mqsideploy -i saferpayment.ace -p 4414 -e BNI_SERVER19 -a $1
+~/IBM/ace-11.0.0.11/server/bin/mqsideploy -i saferpayment.ace -p 4414 -e BNI_SERVER20 -a $1

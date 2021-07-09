@@ -7,7 +7,7 @@
         <xs:element name="header">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="coreJournal" type="xs:unsignedInt" />
+              <xs:element name="coreJournal" type="xs:string" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -15,9 +15,9 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element name="message" type="xs:string" />
-              <xs:element name="SP_Intercept" type="xs:unsignedByte" />
+              <xs:element name="SP_Intercept" type="xs:string" />
               <xs:element name="SP_Block" type="xs:string" />
-              <xs:element name="FromAccount" type="xs:unsignedInt" />
+              <xs:element name="FromAccount" type="xs:string" />
               <xs:element name="Timestamp" type="xs:string" />
               <xs:element name="reffNum" type="xs:string" />
             </xs:sequence>

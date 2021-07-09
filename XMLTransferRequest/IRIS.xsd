@@ -3,6 +3,7 @@
   <xsd:element name="ToAccount" type="xsd:string"/>
   <xsd:element name="TransactionType" type="xsd:string"/>
   <xsd:element name="FromAccount" type="xsd:string"/>
+  <xsd:element name="AccountNum" type="xsd:string"/>
   <xsd:element name="MTID" type="xsd:string"/>
   <xsd:element name="Amount" type="xsd:string"/>
   <xsd:element name="SPRequirement" type="xsd:string"/>
@@ -14,7 +15,8 @@
     <xsd:sequence>
       <xsd:element ref="Timestamp"/>
       <xsd:element ref="reffNum"/>
-      <xsd:element ref="FromAccount"/>
+      <xsd:element ref="FromAccount" minOccurs="0" maxOccurs="1"/>
+      <xsd:element ref="AccountNum" minOccurs="0" maxOccurs="1"/>
       <xsd:element ref="ToAccount"/>
       <xsd:element ref="Amount"/>
       <xsd:element ref="TransactionType"/>
