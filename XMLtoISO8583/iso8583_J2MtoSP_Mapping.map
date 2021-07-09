@@ -48,7 +48,7 @@
         <expression>
             <input path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/AuthorizationIdentificationResponse_038" var="AuthorizationIdentificationResponse_038"/>
             <output path="$ComIbmMessageAssembly_IRIS/IRIS/SPRequirement"/>
-            <code lang="xpath">fn:substring($AuthorizationIdentificationResponse_038 ,2,5)</code>
+            <code lang="xpath">fn:replace($AuthorizationIdentificationResponse_038,' ' ,'' )</code>
         </expression>
         <move>
             <input path="$ComIbmMessageAssembly_ISO8583_1987_Unpacked/ISO8583_1987_Unpacked/CardAcceptorTerminalIdentification_041" var="CardAcceptorTerminalIdentification_041"/>
