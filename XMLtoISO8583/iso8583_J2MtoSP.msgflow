@@ -12,7 +12,7 @@
       <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="208,107" mappingExpression="msl://{default}#iso8583_J2MtoSP_Mapping">
         <translation xmi:type="utility:ConstantString" string="Mapping"/>
       </nodes>
-      <nodes xmi:type="ComIbmWSRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="398,108" URLSpecifier="http://161.202.178.199:37911" messageDomainProperty="XMLNSC">
+      <nodes xmi:type="ComIbmWSRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="398,108" URLSpecifier="http://161.202.178.199:37911" httpVersion="1.1" messageDomainProperty="XMLNSC">
         <translation xmi:type="utility:ConstantString" string="HTTP Request"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="306,106" computeExpression="esql://routine/#iso8583_J2MtoSP_Compute.Main">
